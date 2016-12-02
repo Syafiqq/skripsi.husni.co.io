@@ -1,0 +1,12 @@
+{
+  "name": "localhost/skrpisi.husni.co.io",
+  "description": "titipan skripsi",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "syafiq",
+      "email": "syafiq.rezpector@gmail.com"
+    }
+  ]
+}
