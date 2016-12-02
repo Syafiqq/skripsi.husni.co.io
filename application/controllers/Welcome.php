@@ -1,4 +1,6 @@
 <?php
+use Carbon\Carbon;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
@@ -21,6 +23,6 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
         $this->load->helper('url');
-		$this->load->view('landing_page');
+		$this->load->view('landing_page', array('year' => Carbon::now()->year));
 	}
 }
