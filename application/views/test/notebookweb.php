@@ -53,7 +53,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </ul>
                 </nav>
                 <h1>
-                    <a href="<?php echo site_url('test/notebookweb')?>">Notebook</a>
+                    <a href="<?php echo site_url('test/notebookweb') ?>">Notebook</a>
                 </h1>
                 <a href="#" id="navbtn">Nav Menu</a>
                 <div class="clear"></div>
@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
     </div>
     <!-----script------------->
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/menu.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/menu.js') ?>"></script>
 
     <div class="slider" id="home">
         <div class="wrap">
@@ -91,10 +91,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </div>
             </div>
 
-            <script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/jquery.cslider.js')?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/jquery.cslider.js') ?>"></script>
             <!---strat-slider---->
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/test/notebookweb/css/slider.css')?>"/>
-            <script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/modernizr.custom.28468.js')?>"></script>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/test/notebookweb/css/slider.css') ?>"/>
+            <script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/modernizr.custom.28468.js') ?>"></script>
             <script type="text/javascript">
                 $(function ()
                 {
@@ -120,7 +120,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <p>Terry Rechardson cardigan whatever gentrify Tumblr,gluten-free shorts craysechlitz solvage DIY sutainable Helvetila sriracha.Benh mi ethical.put abird on it VHS irony bisicle rights slow-card iterally retro-sktebord ugh 90'Helvetic hash tag.Next ketfiyeah cornhole park belly,slow-card schilitz.</p>
             </div>
             <div class="pen">
-                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/pen.png')?>">
+                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/pen.png') ?>">
             </div>
         </div>
     </div>
@@ -141,35 +141,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="item">
                         <div class="carousel">
                             <div class="group_2_img1">
-                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider2.jpg')?>" alt="">
+                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider2.jpg') ?>" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="carousel">
                             <div class="group_2_img1">
-                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider3.jpg')?>" alt="">
+                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider3.jpg') ?>" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="carousel">
                             <div class="group_2_img1">
-                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider1.jpg')?>" alt="">
+                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider1.jpg') ?>" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="carousel">
                             <div class="group_2_img1">
-                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider4.jpg')?>" alt="">
+                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider4.jpg') ?>" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="carousel">
                             <div class="group_2_img1">
-                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider5.jpg')?>" alt="">
+                                <img src="<?php echo base_url('assets/frontend/test/notebookweb/images/slider5.jpg') ?>" alt="">
                             </div>
                         </div>
                     </div>
@@ -179,10 +179,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!-- Owl Carousel Assets -->
-<link href="<?php echo base_url('assets/frontend/test/notebookweb/css/owl.carousel.css')?>" rel="stylesheet">
+<link href="<?php echo base_url('assets/frontend/test/notebookweb/css/owl.carousel.css') ?>" rel="stylesheet">
 <!-- Owl Carousel Assets -->
 <!-- Prettify -->
-<script src="<?php echo base_url('assets/frontend/test/notebookweb/js/owl.carousel.js')?>"></script>
+<script src="<?php echo base_url('assets/frontend/test/notebookweb/js/owl.carousel.js') ?>"></script>
 <script>
     $(document).ready(function ()
     {
@@ -389,7 +389,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!-- Add fancyBox light-box -->
-<script src="<?php echo base_url('assets/frontend/test/notebookweb/js/jquery.magnific-popup.js')?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/frontend/test/notebookweb/js/jquery.magnific-popup.js') ?>" type="text/javascript"></script>
 
 <script>
     $(document).ready(function ()
@@ -489,8 +489,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 </div>
 <!-- scroll_top_btn -->
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/move-top.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/easing.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/move-top.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/test/notebookweb/js/easing.js') ?>"></script>
 <script type="text/javascript">
     $(document).ready(function ()
     {
