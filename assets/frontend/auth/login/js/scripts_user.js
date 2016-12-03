@@ -34,49 +34,52 @@
                 }
             }).promise().done(function ()
             {
-                var data_sent = form.serializeObject();
-                data_sent['role'] = 'user';
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: data_sent,
-                    dataType: 'json',
-                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8; X-Requested-With: XMLHttpRequest'
-                })
-                    .done(function (data)
-                    {
-                        if (data.hasOwnProperty('data'))
+                if (gate)
+                {
+                    var data_sent = form.serializeObject();
+                    data_sent['role'] = 'user';
+                    $.ajax({
+                        type: form.attr('method'),
+                        url: form.attr('action'),
+                        data: data_sent,
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8; X-Requested-With: XMLHttpRequest'
+                    })
+                        .done(function (data)
                         {
-                            if (data['data'].hasOwnProperty('notify'))
+                            if (data.hasOwnProperty('data'))
                             {
-                                var notify = data['data']['notify'];
-                                for (var i = -1; ++i < notify.length;)
+                                if (data['data'].hasOwnProperty('notify'))
                                 {
-                                    $.notify({message: notify[i][0]}, {type: notify[i][1]});
+                                    var notify = data['data']['notify'];
+                                    for (var i = -1; ++i < notify.length;)
+                                    {
+                                        $.notify({message: notify[i][0]}, {type: notify[i][1]});
+                                    }
                                 }
                             }
-                        }
-                        if (data.hasOwnProperty('code'))
-                        {
-                            if (data['code'] == 200)
+                            if (data.hasOwnProperty('code'))
                             {
-                                setTimeout(function ()
+                                if (data['code'] == 200)
                                 {
-                                    location.href = window.location.protocol + "//" + window.location.host
-                                }, 2000);
+                                    setTimeout(function ()
+                                    {
+                                        location.href = window.location.protocol + "//" + window.location.host
+                                    }, 2000);
+                                }
                             }
-                        }
 
-                    })
-                    .fail(function ()
-                    {
-                        $.notify({
-                            message: 'Error', url: window.location.protocol + "//" + window.location.host
-                        }, {
-                            // settings
-                            type: 'danger'
-                        });
-                    })
+                        })
+                        .fail(function ()
+                        {
+                            $.notify({
+                                message: 'Error', url: window.location.protocol + "//" + window.location.host
+                            }, {
+                                // settings
+                                type: 'danger'
+                            });
+                        })
+                }
             });
         });
 
