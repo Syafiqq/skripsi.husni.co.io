@@ -52,4 +52,9 @@ class Test extends CI_Controller
     {
         $this->load->view('test/authentication');
     }
+
+    public function adminlte()
+    {
+        $this->load->view('test/adminlte');
+    }
 }
