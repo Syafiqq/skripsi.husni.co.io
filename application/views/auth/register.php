@@ -47,7 +47,7 @@
     <div class="inner-bg">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-4 col-md-offset-4">
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
