@@ -48,7 +48,15 @@ class Auth extends CI_Controller
         }
         else
         {
-            $this->load->view('auth/login');
+            if (isset($_GET['role']))
+            {
+                if (strtolower($_GET['role']) == 'counselor')
+                {
+                    $this->load->view('auth/login/counselor');
+                    return;
+                }
+            }
+            $this->load->view('auth/login/user');
         }
     }
 
@@ -59,7 +67,7 @@ class Auth extends CI_Controller
             if (isset($_POST['email']) && isset($_POST['password']))
             {
                 $this->load->model('mauth');
-                $result = $this->mauth->login($_POST['email'], $_POST['password']);
+                $result = $this->mauth->login($_POST['email'], $_POST['password'], isset($_POST['role']) ? $_POST['role'] : 'user');
                 if (count($result) > 0)
                 {
                     $_SESSION['user']['auth'] = $result[0];
