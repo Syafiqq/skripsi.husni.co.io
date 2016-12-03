@@ -24,8 +24,22 @@ class Mauth extends CI_Model
      */
     public function login($email, $password, $role)
     {
-        $query = 'SELECT `id`, `username`, `email`, `role`, `password`, `status` FROM `user` WHERE `email` = ? AND `password` = ? AND `role` = ? LIMIT 1';
-        $result = $this->db->query($query, array(strtolower($email), md5(md5($password)), strtolower($role)));
+        $query = 'SELECT `id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar` FROM `user` WHERE `email` = ? AND `password` = ? AND `role` = ? LIMIT 1';
+        $result = $this->db->query($query, array($email, md5(md5($password)), $role));
         return $result->result_array();
+    }
+
+    public function register($username, $email, $role, $gender, $password, $status)
+    {
+        if ($gender == 'm')
+        {
+            $avatar = mt_rand(0, 22);
+        }
+        else
+        {
+            $avatar = mt_rand(0, 26);
+        }
+        $query = 'INSERT INTO `user`(`id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)';
+        $this->db->query($query, array($username, $email, $role, (string)$gender, md5(md5($password)), $status, (int)$avatar));
     }
 }
