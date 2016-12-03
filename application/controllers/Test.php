@@ -47,4 +47,9 @@ class Test extends CI_Controller
     {
         $this->load->view('test/notebookweb');
     }
+
+    public function authentication()
+    {
+        $this->load->view('test/authentication');
+    }
 }
