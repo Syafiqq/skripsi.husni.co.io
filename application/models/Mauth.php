@@ -17,14 +17,15 @@ class Mauth extends CI_Model
     }
 
     /**
-     * @param $email
-     * @param $password
-     * return array
+     * @param string $email
+     * @param string $password
+     * @param string $role
+     * @return array
      */
-    public function login($email, $password)
+    public function login($email, $password, $role)
     {
-        $query = 'SELECT `id`, `username`, `email`, `password`, `status` FROM `user` WHERE `email` = ? AND `password` = ? LIMIT 1';
-        $result = $this->db->query($query, array(strtolower($email), md5(md5($password))));
+        $query = 'SELECT `id`, `username`, `email`, `role`, `password`, `status` FROM `user` WHERE `email` = ? AND `password` = ? AND `role` = ? LIMIT 1';
+        $result = $this->db->query($query, array(strtolower($email), md5(md5($password)), strtolower($role)));
         return $result->result_array();
     }
 }
