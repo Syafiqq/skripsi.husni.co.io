@@ -4,7 +4,7 @@
      Fullscreen background
      */
     //$.backstretch("../assets/frontend/test/authentication/assets/img/backgrounds/1.jpg");
-    $.backstretch(window.location.protocol + "//" + window.location.host + "/assets/frontend/auth/login/img/backgrounds/2.jpg");
+    $.backstretch(window.location.protocol + "//" + window.location.host + "/assets/frontend/auth/login/img/backgrounds/counselor.jpg");
 
     $(function ()
     {
@@ -34,10 +34,12 @@
                 }
             }).promise().done(function ()
             {
+                var data_sent = form.serializeObject();
+                data_sent['role'] = 'counselor';
                 $.ajax({
                     type: form.attr('method'),
                     url: form.attr('action'),
-                    data: form.serializeObject(),
+                    data: data_sent,
                     dataType: 'json',
                     contentType: 'application/x-www-form-urlencoded; charset=UTF-8; X-Requested-With: XMLHttpRequest'
                 })
