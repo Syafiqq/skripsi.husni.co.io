@@ -31,7 +31,8 @@ img{max-width:100%;}
 /*end reset*/
 body{
   font-family: 'Open Sans', sans-serif;
-  background: #fff;
+  background: #37474F;
+  /*background: #fff*/;
 }
 .wrap{
 	margin:0 auto;
@@ -390,7 +391,8 @@ form input[type="submit"]:hover{
 
 /*******footer***/
 .footer {
-	background: #fff;
+	background: #37474F;
+	/*background: #fff*/;
 }
 .footer-con{
 	margin: 1em auto;
@@ -402,7 +404,9 @@ form input[type="submit"]:hover{
 	padding: 0.2em 0;
 }
 .footer-left p{
-	color:#272727;
+	/*color:#272727*/;
+	color:#ffffff;
+	opacity: .7;
 	font-size:1em;
 	font-weight:600;
 }
