@@ -49,7 +49,7 @@
             <div class="row">
                 <div id="notif" class="col-md-12">
                 </div>
-                <div class="col-md-4 offset-md-4">
+                <div class="col-md-4 col-md-offset-4">
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
