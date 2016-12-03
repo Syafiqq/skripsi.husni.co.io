@@ -24,6 +24,8 @@ class Welcome extends CI_Controller
     public function index()
     {
         $this->load->helper('url');
+        $this->load->library('session');
+        session_destroy();
         $this->load->view('landing_page', array('year' => Carbon::now()->year));
     }
 }

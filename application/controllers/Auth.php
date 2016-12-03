@@ -31,7 +31,6 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->helper('url');
         $this->load->library('session');
-        unset($_SESSION);
         // Your own constructor code
     }
 
