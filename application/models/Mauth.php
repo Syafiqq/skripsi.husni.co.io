@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by : 
+ * This <skripsi.husni.co.io> project created by :
  * Name         : syafiq
  * Date / Time  : 03 December 2016, 8:39 PM.
  * Email        : syafiq.rezpector@gmail.com

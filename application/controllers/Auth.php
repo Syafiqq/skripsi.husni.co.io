@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by : 
+ * This <skripsi.husni.co.io> project created by :
  * Name         : syafiq
  * Date / Time  : 03 December 2016, 6:07 PM.
  * Email        : syafiq.rezpector@gmail.com
@@ -37,7 +37,7 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        
+
     }
 
     public function login()
@@ -56,11 +56,11 @@ class Auth extends CI_Controller
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
         {
-            if(isset($_POST['email']) && isset($_POST['password']))
+            if (isset($_POST['email']) && isset($_POST['password']))
             {
                 $this->load->model('mauth');
                 $result = $this->mauth->login($_POST['email'], $_POST['password']);
-                if(count($result) > 0)
+                if (count($result) > 0)
                 {
                     $_SESSION['user']['auth'] = $result[0];
                     echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
