@@ -21,7 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-    <link rel="apple-touch-icon" href="<?php echo base_url('apple-touch-icon.png')?>">
+    <link rel="apple-touch-icon" href="<?php echo base_url('apple-touch-icon.png') ?>">
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/html5boilerplate/css/normalize.css') ?>">
@@ -44,14 +44,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="wrap">
             <header id="topnav">
                 <h1>
-                    <a href="<?php echo site_url('test/notebookweb')?>">Skripsi</a>
+                    <a href="<?php echo site_url('test/notebookweb') ?>">Skripsi</a>
                 </h1>
                 <a href="#" id="navbtn">Nav Menu</a>
                 <div class="clear"></div>
             </header>
         </div>
     </div>
-    <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/menu.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/menu.js') ?>"></script>
     <div class="slider" id="home">
         <div class="wrap">
             <!---start-da-slider----->
@@ -59,29 +59,29 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register')?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register')?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register')?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
 
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register')?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
 
                 </div>
             </div>
-            <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/jquery.cslider.js')?>"></script>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/welcome/landing_page/css/slider.css')?>"/>
-            <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/modernizr.custom.28468.js')?>"></script>
+            <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/jquery.cslider.js') ?>"></script>
+            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/welcome/landing_page/css/slider.css') ?>"/>
+            <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/modernizr.custom.28468.js') ?>"></script>
             <script type="text/javascript">
                 $(function ()
                 {
@@ -100,7 +100,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="wrap">
         <div class="footer-con">
             <div class="footer-left">
-                <p> <?php echo $year;?> &#169; Template by
+                <p> <?php echo $year; ?> &#169; Template by
                     <a href="#">W3layouts</a>
                 </p>
             </div>
@@ -109,8 +109,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 <!-- scroll_top_btn -->
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/move-top.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/easing.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/move-top.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/easing.js') ?>"></script>
 <script type="text/javascript">
     $(document).ready(function ()
     {
@@ -144,8 +144,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <span id="toTopHover" style="opacity: 1;"></span>
 </a>
 
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/html5boilerplate/js/plugins.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/html5boilerplate/js/main.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/html5boilerplate/js/plugins.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/html5boilerplate/js/main.js') ?>"></script>
 </body>
 </html>
 
