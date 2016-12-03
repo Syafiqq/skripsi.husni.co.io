@@ -30,6 +30,8 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->library('session');
+        unset($_SESSION);
         // Your own constructor code
     }
 
@@ -40,10 +42,56 @@ class Auth extends CI_Controller
 
     public function login()
     {
-        $this->load->view('auth/login');
+        if (isset($_SESSION['user']['auth']))
+        {
+            redirect('/');
+        }
+        else
+        {
+            $this->load->view('auth/login');
+        }
+    }
+
+    public function do_login()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if(isset($_POST['email']) && isset($_POST['password']))
+            {
+                $this->load->model('mauth');
+                $result = $this->mauth->login($_POST['email'], $_POST['password']);
+                if(count($result) > 0)
+                {
+                    $_SESSION['user']['auth'] = $result[0];
+                    echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
+                        array('Authentication complete', 'success')
+                    ))));
+                }
+                else
+                {
+                    echo json_encode(array('code' => 403, 'message' => 'User Not Registered', 'data' => array('notify' => array(
+                        array('User Not Registered', 'info')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('danger', 'Bad Request')
+            ))));
+        }
     }
 
     public function register()
     {
     }
+
+
 }
