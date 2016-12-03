@@ -64,7 +64,7 @@
                                 {
                                     setTimeout(function ()
                                     {
-                                        location.href = window.location.protocol + "//" + window.location.host
+                                        location.href = window.location.protocol + '//' + window.location.host + '/dashboard'
                                     }, 2000);
                                 }
                             }
@@ -73,7 +73,7 @@
                         .fail(function ()
                         {
                             $.notify({
-                                message: 'Error', url: window.location.protocol + "//" + window.location.host
+                                message: 'Error', url: window.location.protocol + '//' + window.location.host
                             }, {
                                 // settings
                                 type: 'danger'
