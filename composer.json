@@ -8,5 +8,8 @@
       "name": "syafiq",
       "email": "syafiq.rezpector@gmail.com"
     }
-  ]
+  ],
+  "require": {
+    "nesbot/carbon": "^1.21"
+  }
 }

@@ -34,3 +34,4 @@ ERROR - 2016-12-02 20:52:23 --> 404 Page Not Found: Assets/frontend
 ERROR - 2016-12-02 20:52:54 --> 404 Page Not Found: Assets/frontend
 ERROR - 2016-12-02 20:58:14 --> Severity: error --> Exception: Call to undefined function base_url() /home/syafiq/Documents/JetBrains/PhpStorm/skripsi/skripsi.husni.co.io/application/views/landing_page.php 24
 ERROR - 2016-12-02 20:58:52 --> 404 Page Not Found: Assets/frontend
+ERROR - 2016-12-02 21:20:06 --> 404 Page Not Found: Auth/register

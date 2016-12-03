@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by : 
+ * This <skripsi.husni.co.io> project created by :
  * Name         : syafiq
  * Date / Time  : 02 December 2016, 6:00 PM.
  * Email        : syafiq.rezpector@gmail.com
@@ -35,7 +35,7 @@ class Test extends CI_Controller
 
     public function index()
     {
-        
+
     }
 
     public function html5boilerplate()
@@ -46,5 +46,10 @@ class Test extends CI_Controller
     public function notebookweb()
     {
         $this->load->view('test/notebookweb');
+    }
+
+    public function authentication()
+    {
+        $this->load->view('test/authentication');
     }
 }
