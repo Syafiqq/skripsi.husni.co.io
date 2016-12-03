@@ -53,8 +53,8 @@
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
-                                <h3>Login to our site</h3>
-                                <p>Please fill the form :</p>
+                                <h3>Hello Counselor</h3>
+                                <p>Login to our site</p>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-lock"></i>
@@ -74,6 +74,14 @@
                             </form>
                         </div>
                     </div>
+                    <div class="social-login">
+                        <div class="social-login-buttons">
+                            <a class="btn btn-link-2" href="<?php echo site_url('auth/login') . '?role=user' ?>">
+                                <i class="fa fa-eye-slash"></i>
+                                I just a normal user
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,7 +98,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/auth/login/js/jquery.backstretch.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/auth/login/js/scripts.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/auth/login/js/scripts_counselor.js') ?>"></script>
 
 <!--[if lt IE 10]>
 <script src="<?php echo base_url('assets/frontend/auth/login/js/placeholder.js')?>"></script>
