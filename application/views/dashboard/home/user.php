@@ -265,18 +265,18 @@ desired effect
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <b>Story Stored</b>
-                                    <a class="pull-right">1,322</a>
+                                    <a class="pull-right"><?php echo number_format(isset($storyTotal['stored']) ? $storyTotal['stored'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Story Unfinished</b>
-                                    <a class="pull-right">543</a>
+                                    <a class="pull-right"><?php echo number_format(isset($storyTotal['unfinished']) ? $storyTotal['unfinished'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Story Shared</b>
-                                    <a class="pull-right">234</a>
+                                    <a class="pull-right"><?php echo number_format(isset($storyTotal['shared']) ? $storyTotal['shared'] : 0, 0, ',', '.') ?></a>
                                 </li>
                             </ul>
-                            <a href="#" class="btn btn-primary btn-block">
+                            <a href="<?php echo site_url('story') ?>" class="btn btn-primary btn-block">
                                 <b>Tell a new story</b>
                             </a>
                         </div>
@@ -338,68 +338,53 @@ desired effect
                             <h3 class="box-title">Stories</h3>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <table class="table table-bordered table-striped">
-                                <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Story</th>
-                                    <th style="width: 220px">Rating</th>
-                                    <th style="width: 40px">Detail</th>
-                                </tr>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <input class="generate-rating" value="4">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-block btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                            Detail
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Clean database</td>
-                                    <td>
-                                        <input class="generate-rating" value="7">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-block btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                            Detail
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Cron job running</td>
-                                    <td>
-                                        <input class="generate-rating" value="0">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-block btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                            Detail
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Fix and squish bugs</td>
-                                    <td>
-                                        <input class="generate-rating" value="10">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-block btn-primary btn-xs">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                            Detail
-                                        </button>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                        <?php
+                        if (isset($storiesMetadata) && (!empty($storiesMetadata)))
+                        {
+                            echo '<div class="box-body">';
+                            echo '<table class="table table-bordered table-striped">';
+                            echo '<tr>';
+                            echo '<th style="width: 10px">#</th>';
+                            echo '<th>Title</th>';
+                            echo '<th style="width: 220px">Rating</th>';
+                            echo '<th style="width: 40px">Status</th>';
+                            echo '<th style="width: 40px">Detail</th>';
+                            echo '</tr>';
+                            foreach ($storiesMetadata as $key => $value)
+                            {
+                                echo '<tr>';
+                                echo '<td>' . ($key + 1) . '.</td>';
+                                echo "<td>${value['title']}</td>";
+                                echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
+                                echo '<td>';
+                                echo $value['published'] == 1 ?
+                                    '<abbr title="Finished"><span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>';
+                                echo '&nbsp;&nbsp;';
+                                echo $value['counselor'] == null ?
+                                    '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
+                                echo '</td>';
+                                echo '<td>';
+                                echo '<button type="button" action="' . site_url('story/detail') . '?id=' . $value['id'] . '" class="btn btn-block btn-primary btn-xs">';
+                                echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
+                                echo ' Detail';
+                                echo '</button>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                            echo '</table>';
+                            echo '</div>';
+                        }
+                        else
+                        {
+                            ?>
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
+                            </div>
+                            <?php
+                        }
+                        ?>
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
