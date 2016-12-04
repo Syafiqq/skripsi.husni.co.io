@@ -71,7 +71,7 @@
                                     <label class="sr-only" for="form-select">Role...</label>
                                     <select name="role" class="form-select form-control" id="form-select">
                                         <option value="">Role...</option>
-                                        <option value="user">User</option>
+                                        <option value="student">Student</option>
                                         <option value="counselor">Counselor</option>
                                     </select>
                                 </div>
