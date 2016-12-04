@@ -33,6 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/css/star-rating.min.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/components-font-awesome/css/font-awesome.min.css') ?>">
     <!-- Ionicons -->
@@ -44,6 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') ?>">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -274,6 +276,9 @@ desired effect
                                     <a class="pull-right">234</a>
                                 </li>
                             </ul>
+                            <a href="#" class="btn btn-primary btn-block">
+                                <b>Tell a new story</b>
+                            </a>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -327,6 +332,78 @@ desired effect
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Stories</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Story</th>
+                                    <th style="width: 220px">Rating</th>
+                                    <th style="width: 40px">Detail</th>
+                                </tr>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>Update software</td>
+                                    <td>
+                                        <input class="generate-rating" value="4">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-block btn-primary btn-xs">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            Detail
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td>Clean database</td>
+                                    <td>
+                                        <input class="generate-rating" value="7">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-block btn-primary btn-xs">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            Detail
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td>Cron job running</td>
+                                    <td>
+                                        <input class="generate-rating" value="0">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-block btn-primary btn-xs">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            Detail
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                    <td>Fix and squish bugs</td>
+                                    <td>
+                                        <input class="generate-rating" value="10">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-block btn-primary btn-xs">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                            Detail
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
             </div>
             <!-- /.row -->
 
@@ -441,11 +518,35 @@ desired effect
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
+<script type="text/javascript">
+    (function ($)
+    {
+
+        $(function ()
+        {
+
+        });
+
+        $('input.generate-rating').rating({
+            displayOnly: true,
+            size: 'xxs',
+            stars: 10,
+            showCaption: false,
+            showClear: false,
+            max: 10,
+            animate: false
+        });
+        /*
+         * Run right away
+         * */
+    })(jQuery);
+</script>
 </body>
 </html>
 
