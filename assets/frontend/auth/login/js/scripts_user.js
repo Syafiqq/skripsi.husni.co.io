@@ -37,7 +37,7 @@
                 if (gate)
                 {
                     var data_sent = form.serializeObject();
-                    data_sent['role'] = 'user';
+                    data_sent['role'] = 'student';
                     $.ajax({
                         type: form.attr('method'),
                         url: form.attr('action'),
