@@ -55,4 +55,23 @@ class Mstory extends CI_Model
         $result = $this->db->query($query, array((int)$user));
         return $result->result_array();
     }
+
+    public function getSpecificStory($user, $storyID)
+    {
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`, `rating`, `created`, `update`, `count`, `published` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$user, (int)$storyID));
+        return $result->result_array();
+    }
+
+    public function updateRating($story, $value)
+    {
+        $query = 'UPDATE `story` SET `rating`= ? WHERE id = ?';
+        $this->db->query($query, array((float)round($value, 1, PHP_ROUND_HALF_UP), (int)$story));
+    }
+
+    public function do_publish($story)
+    {
+        $query = 'UPDATE `story` SET `published`= 1 WHERE id = ?';
+        $this->db->query($query, array((int)$story));
+    }
 }
