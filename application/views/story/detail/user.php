@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Story Detail</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -331,64 +331,150 @@ desired effect
                     </div>
                     <!-- /.box -->
                 </div>
-                <!-- /.col -->
+
                 <div class="col-md-9">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Stories</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <?php
-                        if (isset($storiesMetadata) && (!empty($storiesMetadata)))
-                        {
-                            echo '<div class="box-body">';
-                            echo '<table class="table table-bordered table-striped">';
-                            echo '<tr>';
-                            echo '<th style="width: 10px">#</th>';
-                            echo '<th>Title</th>';
-                            echo '<th style="width: 220px">Rating</th>';
-                            echo '<th style="width: 40px">Status</th>';
-                            echo '<th style="width: 40px">Detail</th>';
-                            echo '</tr>';
-                            foreach ($storiesMetadata as $key => $value)
-                            {
-                                echo '<tr>';
-                                echo '<td>' . ($key + 1) . '.</td>';
-                                echo "<td>${value['title']}</td>";
-                                echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
-                                echo '<td>';
-                                echo $value['published'] == 1 ?
-                                    '<abbr title="Finished"><span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>';
-                                echo '&nbsp;&nbsp;';
-                                echo $value['counselor'] == null ?
-                                    '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
-                                echo '</td>';
-                                echo '<td>';
-                                echo '<form action="' . site_url('story/detail') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '"><button type="submit" class="btn btn-block btn-primary btn-xs goto-detail">';
-                                echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
-                                echo ' Detail';
-                                echo '</button></form>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                            echo '</table>';
-                            echo '</div>';
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="box-body">
-                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
-                            </div>
-                            <?php
-                        }
+                    <?php
+                    if (count($story) > 0)
+                    {
                         ?>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">My Story</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
+                                    </div>
+                                    <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
+                                        <?php echo $story['main'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">My Story Additional Information</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <form class="form-horizontal" id="null">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="story_title" class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static"><?php echo $story['title'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story_information" class="col-sm-2 control-label">Additional Information</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static"><?php echo $story['information'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story_main" class="col-sm-2 control-label">Created</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static"><?php echo $story['created'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story_main" class="col-sm-2 control-label">Updated</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static"><?php echo $story['update'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story_main" class="col-sm-2 control-label">Total Modification</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static"><?php echo $story['count'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story_main" class="col-sm-2 control-label">Counselor</label>
+                                        <div class="col-sm-10">
+                                            <p class="form-control-static"><?php echo $story['counselor'] == null ? 'None' : $story['name'] . '(' . $story['email'] . ')'
+                                                ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="story_main" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <?php echo "<input id=\"generate-rating\" value=\"${story['rating']}\" method='post' action='" . site_url('story/do_updaterating') . '?id=' . $story['id'] . "'>" ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-footer -->
+                            </form>
+
+                            <?php
+                            if ($story['published'] == 0)
+                            {
+                                ?>
+                                <form class="form-horizontal" action="<?php echo site_url('story/do_mark') . '?id=' . $story['id'] ?>" method="post" id="mark_story">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="story_title" class="col-sm-2 control-label">Finished ?</label>
+                                            <div class="col-sm-10">
+                                                <button type="submit" class="btn btn-success">Mark As Finished</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="form-horizontal" action="<?php echo site_url('story/edit') ?>" method="get" id="update_story">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <input type="hidden" name="id" value="<?php echo $story['id'] ?>">
+                                            <label for="story_title" class="col-sm-2 control-label">Update Story</label>
+                                            <div class="col-sm-10">
+                                                <button type="submit" class="btn btn-info">Click to Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <?php
+                            }
+                            else
+                            {
+                                if ($story['counselor'] == null)
+                                {
+                                    ?>
+                                    <form class="form-horizontal" action="<?php echo site_url('story/share') ?>" method="get" id="share_story">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <input type="hidden" name="id" value="<?php echo $story['id'] ?>">
+                                                <label for="story_title" class="col-sm-2 control-label">Share Story</label>
+                                                <div class="col-sm-10">
+                                                    <button type="submit" class="btn btn-success">Click to Share</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <?php
+                                }
+                            }
+                            ?>
+
+                            <!-- /.box-body -->
+                        </div>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <div class="box box-danger">
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">Sorry</h1>
+                                <h2 style="text-align: center; color: #424242.;">You do not have permission to read this story.</h2>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
+                <!-- /.col -->
             </div>
             <!-- /.row -->
 
@@ -508,30 +594,7 @@ desired effect
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
-<script type="text/javascript">
-    (function ($)
-    {
-
-        $(function ()
-        {
-
-        });
-
-        $('input.generate-rating').rating({
-            displayOnly: true,
-            size: 'xxs',
-            stars: 10,
-            showCaption: false,
-            showClear: false,
-            max: 10,
-            animate: false
-        });
-        /*
-         * Run right away
-         * */
-    })(jQuery);
-</script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/story/detail/js/user.js') ?>"></script>
 </body>
 </html>
 

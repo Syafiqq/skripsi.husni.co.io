@@ -54,9 +54,7 @@
                         // settings
                         type: 'danger'
                     });
-                })
-
-
+                });
         });
 
 

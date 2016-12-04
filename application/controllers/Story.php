@@ -106,4 +106,148 @@ class Story extends CI_Controller
             ))));
         }
     }
+
+    public function detail()
+    {
+        if (isset($_SESSION['user']['auth']))
+        {
+            if (isset($_GET['id']))
+            {
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'student' :
+                    {
+                        $this->load->model('mstory');
+                        $storedStory = $this->mstory->getStoredStoryCount($_SESSION['user']['auth']['id']);
+                        $unfinishedStory = $this->mstory->getUnfinishedStoryCount($_SESSION['user']['auth']['id']);
+                        $sharedStory = $this->mstory->getSharedStoryCount($_SESSION['user']['auth']['id']);
+                        $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                        if (count($story) > 0)
+                        {
+                            $story = $story[0];
+                            if ($story['counselor'] != null)
+                            {
+                                $this->load->model('mauth');
+                                $story['counselor'] = $this->mauth->getNameAndEmail($story['counselor'])[0];
+                            }
+                        }
+                        else
+                        {
+                            $story = array();
+                        }
+                        $this->load->view('story/detail/user', array(
+                            'user' => $_SESSION['user']['auth'],
+                            'year' => Carbon::now()->year,
+                            'storyTotal' => array(
+                                'stored' => $storedStory[0]['count'],
+                                'unfinished' => $unfinishedStory[0]['count'],
+                                'shared' => $sharedStory[0]['count']),
+                            'story' => $story));
+                    }
+                        return;
+                }
+                redirect('dashboard');
+            }
+            else
+            {
+                redirect('dashboard');
+            }
+        }
+        else
+        {
+            redirect('/');
+        }
+    }
+
+    public function do_updaterating()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['value']) && isset($_GET['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                if (count($story) > 0)
+                {
+                    if (($_POST['value'] >= 0.0) && ($_POST['value'] <= 10.0))
+                    {
+                        $this->mstory->updateRating($_GET['id'], $_POST['value']);
+                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'data' => array('notify' => array(
+                            array('Update Successful', 'success')
+                        ))));
+                    }
+                    else
+                    {
+                        echo json_encode(array('code' => 402, 'message' => 'Invalid Rating', 'data' => array('notify' => array(
+                            array('Invalid Rating', 'warning')
+                        ))));
+                    }
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
+
+    public function do_mark()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_GET['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                if (count($story) > 0)
+                {
+                    if ($story[0]['published'] == 0)
+                    {
+                        $this->mstory->do_publish($_GET['id']);
+                        echo json_encode(array('code' => 200, 'message' => 'Change Successful', 'data' => array('notify' => array(
+                            array('Change Successful', 'success')
+                        ))));
+                    }
+                    else
+                    {
+                        echo json_encode(array('code' => 402, 'message' => 'Story is already finished', 'data' => array('notify' => array(
+                            array('Story is already finished', 'warning')
+                        ))));
+                    }
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
 }

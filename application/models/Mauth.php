@@ -42,4 +42,11 @@ class Mauth extends CI_Model
         $query = 'INSERT INTO `user`(`id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)';
         $this->db->query($query, array($username, $email, $role, (string)$gender, md5(md5($password)), $status, (int)$avatar));
     }
+
+    public function getNameAndEmail($id)
+    {
+        $query = 'SELECT `id`, `username`, `email` FROM `user` WHERE `id` = ?';
+        $result = $this->db->query($query, array((int)$id));
+        return $result->result_array();
+    }
 }
