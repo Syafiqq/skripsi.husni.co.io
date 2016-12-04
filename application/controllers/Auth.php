@@ -70,7 +70,7 @@ class Auth extends CI_Controller
                 if ($this->isEmailValid($_POST['email']))
                 {
                     $this->load->model('mauth');
-                    $result = $this->mauth->login($_POST['email'], $_POST['password'], isset($_POST['role']) ? $_POST['role'] : 'user');
+                    $result = $this->mauth->login($_POST['email'], $_POST['password'], isset($_POST['role']) ? $_POST['role'] : 'student');
                     if (count($result) > 0)
                     {
                         $_SESSION['user']['auth'] = $result[0];
@@ -133,11 +133,11 @@ class Auth extends CI_Controller
                 if ($this->isEmailValid($_POST['email']))
                 {
                     $_POST['role'] = strtolower($_POST['role']);
-                    if (($_POST['role'] == 'user') || ($_POST['role'] == 'counselor'))
+                    if (($_POST['role'] == 'student') || ($_POST['role'] == 'counselor'))
                     {
                         $_POST['gender'] = strtolower($_POST['gender']);
                         $this->load->model('mauth');
-                        $result = $this->mauth->login($_POST['email'], $_POST['password'], isset($_POST['role']) ? $_POST['role'] : 'user');
+                        $result = $this->mauth->login($_POST['email'], $_POST['password'], isset($_POST['role']) ? $_POST['role'] : 'student');
                         if (count($result) == 0)
                         {
                             $this->mauth->register($_POST['username'], $_POST['email'], $_POST['role'], $_POST['gender'], $_POST['password'], $_POST['status']);
