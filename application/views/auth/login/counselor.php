@@ -78,7 +78,7 @@
                         <div class="social-login-buttons">
                             <a class="btn btn-link-2" href="<?php echo site_url('auth/login') . '?role=user' ?>">
                                 <i class="fa fa-eye-slash"></i>
-                                I just a normal user
+                                I'm Student
                             </a>
                         </div>
                     </div>
