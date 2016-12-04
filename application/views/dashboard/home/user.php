@@ -366,10 +366,10 @@ desired effect
                                     '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<button type="button" action="' . site_url('story/detail') . '?id=' . $value['id'] . '" class="btn btn-block btn-primary btn-xs">';
+                                echo '<form action="' . site_url('story/detail') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '"><button type="submit" class="btn btn-block btn-primary btn-xs goto-detail">';
                                 echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
                                 echo ' Detail';
-                                echo '</button>';
+                                echo '</button></form>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
