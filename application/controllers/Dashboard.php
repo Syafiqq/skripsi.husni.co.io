@@ -33,7 +33,6 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->helper('url');
         $this->load->library('session');
-        log_message('ERROR', var_export($_SESSION, true));
         // Your own constructor code
     }
 
@@ -47,13 +46,14 @@ class Dashboard extends CI_Controller
                 {
                     $this->index_user();
                 }
-                    break;
+                    return;
                 case 'counselor' :
                 {
                     $this->index_counselor();
                 }
-                    break;
+                    return;
             }
+            redirect('/');
         }
         else
         {
@@ -63,7 +63,20 @@ class Dashboard extends CI_Controller
 
     private function index_user()
     {
-        $this->load->view('dashboard/home/user', array('user' => $_SESSION['user']['auth'], 'year' => Carbon::now()->year));
+        $this->load->model('mstory');
+        $storedStory = $this->mstory->getStoredStoryCount($_SESSION['user']['auth']['id']);
+        $unfinishedStory = $this->mstory->getUnfinishedStoryCount($_SESSION['user']['auth']['id']);
+        $sharedStory = $this->mstory->getSharedStoryCount($_SESSION['user']['auth']['id']);
+        $storiesMetadata = $this->mstory->getAllStoriesMetadata($_SESSION['user']['auth']['id']);
+        $this->load->view('dashboard/home/user', array(
+            'user' => $_SESSION['user']['auth'],
+            'year' => Carbon::now()->year,
+            'storyTotal' => array(
+                'stored' => $storedStory[0]['count'],
+                'unfinished' => $unfinishedStory[0]['count'],
+                'shared' => $sharedStory[0]['count']),
+            'storiesMetadata' => $storiesMetadata
+        ));
     }
 
     private function index_counselor()

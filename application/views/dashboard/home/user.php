@@ -33,6 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/css/star-rating.min.css') ?>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/components-font-awesome/css/font-awesome.min.css') ?>">
     <!-- Ionicons -->
@@ -44,6 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') ?>">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -263,17 +265,20 @@ desired effect
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
                                     <b>Story Stored</b>
-                                    <a class="pull-right">1,322</a>
+                                    <a class="pull-right"><?php echo number_format(isset($storyTotal['stored']) ? $storyTotal['stored'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Story Unfinished</b>
-                                    <a class="pull-right">543</a>
+                                    <a class="pull-right"><?php echo number_format(isset($storyTotal['unfinished']) ? $storyTotal['unfinished'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Story Shared</b>
-                                    <a class="pull-right">234</a>
+                                    <a class="pull-right"><?php echo number_format(isset($storyTotal['shared']) ? $storyTotal['shared'] : 0, 0, ',', '.') ?></a>
                                 </li>
                             </ul>
+                            <a href="<?php echo site_url('story') ?>" class="btn btn-primary btn-block">
+                                <b>Tell a new story</b>
+                            </a>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -327,6 +332,63 @@ desired effect
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Stories</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <?php
+                        if (isset($storiesMetadata) && (!empty($storiesMetadata)))
+                        {
+                            echo '<div class="box-body">';
+                            echo '<table class="table table-bordered table-striped">';
+                            echo '<tr>';
+                            echo '<th style="width: 10px">#</th>';
+                            echo '<th>Title</th>';
+                            echo '<th style="width: 220px">Rating</th>';
+                            echo '<th style="width: 40px">Status</th>';
+                            echo '<th style="width: 40px">Detail</th>';
+                            echo '</tr>';
+                            foreach ($storiesMetadata as $key => $value)
+                            {
+                                echo '<tr>';
+                                echo '<td>' . ($key + 1) . '.</td>';
+                                echo "<td>${value['title']}</td>";
+                                echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
+                                echo '<td>';
+                                echo $value['published'] == 1 ?
+                                    '<abbr title="Finished"><span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>';
+                                echo '&nbsp;&nbsp;';
+                                echo $value['counselor'] == null ?
+                                    '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
+                                echo '</td>';
+                                echo '<td>';
+                                echo '<button type="button" action="' . site_url('story/detail') . '?id=' . $value['id'] . '" class="btn btn-block btn-primary btn-xs">';
+                                echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
+                                echo ' Detail';
+                                echo '</button>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                            echo '</table>';
+                            echo '</div>';
+                        }
+                        else
+                        {
+                            ?>
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
             </div>
             <!-- /.row -->
 
@@ -441,11 +503,35 @@ desired effect
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
+<script type="text/javascript">
+    (function ($)
+    {
+
+        $(function ()
+        {
+
+        });
+
+        $('input.generate-rating').rating({
+            displayOnly: true,
+            size: 'xxs',
+            stars: 10,
+            showCaption: false,
+            showClear: false,
+            max: 10,
+            animate: false
+        });
+        /*
+         * Run right away
+         * */
+    })(jQuery);
+</script>
 </body>
 </html>
 
