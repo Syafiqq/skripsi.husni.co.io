@@ -262,16 +262,20 @@ desired effect
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Story Stored</b>
+                                    <b>Student</b>
                                     <a class="pull-right">1,322</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Unfinished</b>
+                                    <b>Join Request</b>
                                     <a class="pull-right">543</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Shared</b>
+                                    <b>Story Unread</b>
                                     <a class="pull-right">234</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Story Shared</b>
+                                    <a class="pull-right">1982</a>
                                 </li>
                             </ul>
                         </div>
@@ -445,7 +449,8 @@ desired effect
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/counselor.js') ?>"></script>
+
 </body>
 </html>
 

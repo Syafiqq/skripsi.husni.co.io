@@ -6,6 +6,8 @@
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
+use Carbon\Carbon;
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller
@@ -41,7 +43,7 @@ class Dashboard extends CI_Controller
         {
             switch ($_SESSION['user']['auth']['role'])
             {
-                case 'user' :
+                case 'student' :
                 {
                     $this->index_user();
                 }
@@ -61,10 +63,11 @@ class Dashboard extends CI_Controller
 
     private function index_user()
     {
+        $this->load->view('dashboard/home/user', array('user' => $_SESSION['user']['auth'], 'year' => Carbon::now()->year));
     }
 
     private function index_counselor()
     {
-        $this->load->view('dashboard/home/user', array('user' => $_SESSION['user']['auth']));
+        $this->load->view('dashboard/home/counselor', array('user' => $_SESSION['user']['auth'], 'year' => Carbon::now()->year));
     }
 }
