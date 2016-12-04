@@ -231,7 +231,7 @@ desired effect
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -262,20 +262,16 @@ desired effect
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Student</b>
+                                    <b>Story Stored</b>
                                     <a class="pull-right">1,322</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Join Request</b>
+                                    <b>Story Unfinished</b>
                                     <a class="pull-right">543</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Unread</b>
-                                    <a class="pull-right">234</a>
-                                </li>
-                                <li class="list-group-item">
                                     <b>Story Shared</b>
-                                    <a class="pull-right">1982</a>
+                                    <a class="pull-right">234</a>
                                 </li>
                             </ul>
                         </div>
@@ -444,10 +440,12 @@ desired effect
 <!-- Bootstrap 3.3.6 -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
 </body>
 </html>
 
