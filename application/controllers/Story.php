@@ -2,7 +2,7 @@
 /**
  * This <skripsi.husni.co.io> project created by :
  * Name         : syafiq
- * Date / Time  : 04 December 2016, 3:50 AM.
+ * Date / Time  : 04 December 2016, 1:59 PM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class Story extends CI_Controller
 {
     /**
      * Index Page for this controller.
@@ -38,6 +38,11 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
+        redirect('story/tell');
+    }
+
+    public function tell()
+    {
         if (isset($_SESSION['user']['auth']))
         {
             switch ($_SESSION['user']['auth']['role'])
@@ -47,13 +52,8 @@ class Dashboard extends CI_Controller
                     $this->index_user();
                 }
                     return;
-                case 'counselor' :
-                {
-                    $this->index_counselor();
-                }
-                    return;
             }
-            redirect('/');
+            redirect('dashboard');
         }
         else
         {
@@ -67,20 +67,43 @@ class Dashboard extends CI_Controller
         $storedStory = $this->mstory->getStoredStoryCount($_SESSION['user']['auth']['id']);
         $unfinishedStory = $this->mstory->getUnfinishedStoryCount($_SESSION['user']['auth']['id']);
         $sharedStory = $this->mstory->getSharedStoryCount($_SESSION['user']['auth']['id']);
-        $storiesMetadata = $this->mstory->getAllStoriesMetadata($_SESSION['user']['auth']['id']);
-        $this->load->view('dashboard/home/user', array(
+        $this->load->view('story/index/user', array(
             'user' => $_SESSION['user']['auth'],
             'year' => Carbon::now()->year,
             'storyTotal' => array(
                 'stored' => $storedStory[0]['count'],
                 'unfinished' => $unfinishedStory[0]['count'],
-                'shared' => $sharedStory[0]['count']),
-            'storiesMetadata' => $storiesMetadata
-        ));
+                'shared' => $sharedStory[0]['count'],
+            )));
     }
 
-    private function index_counselor()
+    public function do_publish()
     {
-        $this->load->view('dashboard/home/counselor', array('user' => $_SESSION['user']['auth'], 'year' => Carbon::now()->year));
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['title']) &&
+                isset($_POST['information']) &&
+                isset($_POST['main'])
+            )
+            {
+                $this->load->model('mstory');
+                $this->mstory->publish($_SESSION['user']['auth']['id'], $_POST['title'], $_POST['information'], $_POST['main']);
+                echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
+                    array('Publishing complete', 'success')
+                ))));
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('danger', 'Bad Request')
+            ))));
+        }
     }
 }

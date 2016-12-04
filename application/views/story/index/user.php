@@ -2,20 +2,14 @@
 /**
  * This <skripsi.husni.co.io> project created by :
  * Name         : syafiq
- * Date / Time  : 04 December 2016, 4:28 AM.
+ * Date / Time  : 04 December 2016, 2:02 PM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
-
 $_avatar = base_url('assets/frontend/avatar/' . ($user['gender'] == 'm' ?
         'm/boy-' . $user['avatar'] . '.png' :
         'm/girl-' . $user['avatar'] . '.png'));
 ?>
-
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -45,6 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/story/index/css/user.css') ?>">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -335,57 +330,38 @@ desired effect
                 <div class="col-md-9">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Stories</h3>
+                            <h3 class="box-title">Tell your story</h3>
                         </div>
                         <!-- /.box-header -->
-                        <?php
-                        if (isset($storiesMetadata) && (!empty($storiesMetadata)))
-                        {
-                            echo '<div class="box-body">';
-                            echo '<table class="table table-bordered table-striped">';
-                            echo '<tr>';
-                            echo '<th style="width: 10px">#</th>';
-                            echo '<th>Title</th>';
-                            echo '<th style="width: 220px">Rating</th>';
-                            echo '<th style="width: 40px">Status</th>';
-                            echo '<th style="width: 40px">Detail</th>';
-                            echo '</tr>';
-                            foreach ($storiesMetadata as $key => $value)
-                            {
-                                echo '<tr>';
-                                echo '<td>' . ($key + 1) . '.</td>';
-                                echo "<td>${value['title']}</td>";
-                                echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
-                                echo '<td>';
-                                echo $value['published'] == 1 ?
-                                    '<abbr title="Finished"><span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>';
-                                echo '&nbsp;&nbsp;';
-                                echo $value['counselor'] == null ?
-                                    '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
-                                echo '</td>';
-                                echo '<td>';
-                                echo '<button type="button" action="' . site_url('story/detail') . '?id=' . $value['id'] . '" class="btn btn-block btn-primary btn-xs">';
-                                echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
-                                echo ' Detail';
-                                echo '</button>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                            echo '</table>';
-                            echo '</div>';
-                        }
-                        else
-                        {
-                            ?>
+                        <!-- form start -->
+                        <form class="form-horizontal" id="tell_story" action="<?php echo site_url('story/do_publish') ?>" method="post">
                             <div class="box-body">
-                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
+                                <div class="form-group">
+                                    <label for="story_title" class="col-sm-2 control-label">Title</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="title" class="form-control" id="story_title" placeholder="Title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="story_information" class="col-sm-2 control-label">Additional Information</label>
+                                    <div class="col-sm-10">
+                                        <textarea id="story_information" style="max-height: 160px" name="information" class="form-control" rows="3" placeholder="Additional Information"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="story_main" class="col-sm-2 control-label">Story</label>
+                                    <div class="col-sm-10">
+                                        <textarea id="story_main" name="main" class="form-control" rows="10" cols="80" placeholder="Tell your story here !"></textarea>
+                                    </div>
+                                </div>
                             </div>
-                            <?php
-                        }
-                        ?>
-                        <!-- /.box-body -->
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <button id="story_cancel" type="button" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-info pull-right">Publish</button>
+                            </div>
+                            <!-- /.box-footer -->
+                        </form>
                     </div>
                     <!-- /.box -->
                 </div>
@@ -393,7 +369,7 @@ desired effect
             <!-- /.row -->
 
         </section>
-        <!-- /.content -->
+        <!-- /. Main content -->
     </div>
     <!-- /.content-wrapper -->
 
@@ -422,75 +398,7 @@ desired effect
                 </a>
             </li>
         </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- Home tab content -->
-            <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript::;">
-                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-                            <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                                <p>Will be 23 on April 24th</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                    <li>
-                        <a href="javascript::;">
-                            <h4 class="control-sidebar-subheading">
-                                Custom Template Design
-                                <span class="pull-right-container">
-                  <span class="label label-danger pull-right">70%</span>
-                </span>
-                            </h4>
-
-                            <div class="progress progress-xxs">
-                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <!-- /.control-sidebar-menu -->
-
-            </div>
-            <!-- /.tab-pane -->
-            <!-- Stats tab content -->
-            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-            <!-- /.tab-pane -->
-            <!-- Settings tab content -->
-            <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
-
-                    <div class="form-group">
-                        <label class="control-sidebar-subheading">
-                            Report panel usage
-                            <input type="checkbox" class="pull-right" checked>
-                        </label>
-
-                        <p>
-                            Some information about this general settings option
-                        </p>
-                    </div>
-                    <!-- /.form-group -->
-                </form>
-            </div>
-            <!-- /.tab-pane -->
-        </div>
     </aside>
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
@@ -502,36 +410,16 @@ desired effect
 <!-- Bootstrap 3.3.6 -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
-<script type="text/javascript">
-    (function ($)
-    {
-
-        $(function ()
-        {
-
-        });
-
-        $('input.generate-rating').rating({
-            displayOnly: true,
-            size: 'xxs',
-            stars: 10,
-            showCaption: false,
-            showClear: false,
-            max: 10,
-            animate: false
-        });
-        /*
-         * Run right away
-         * */
-    })(jQuery);
-</script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/ckeditor/ckeditor.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/story/index/js/user.js') ?>"></script>
 </body>
 </html>
+
 
