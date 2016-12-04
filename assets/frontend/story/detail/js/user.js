@@ -54,11 +54,10 @@
                         // settings
                         type: 'danger'
                     });
-                });
+                })
         });
-
-
     });
+
     /*
      * Run right away
      * */
