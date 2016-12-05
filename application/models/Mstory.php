@@ -63,6 +63,13 @@ class Mstory extends CI_Model
         return $result->result_array();
     }
 
+    public function getSpecificStoryData($user, $storyID)
+    {
+        $query = 'SELECT `id`, `title`, `main`, `published` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$user, (int)$storyID));
+        return $result->result_array();
+    }
+
     public function updateRating($story, $value)
     {
         $query = 'UPDATE `story` SET `rating`= ? WHERE id = ?';
@@ -73,5 +80,11 @@ class Mstory extends CI_Model
     {
         $query = 'UPDATE `story` SET `published`= 1 WHERE id = ?';
         $this->db->query($query, array((int)$story));
+    }
+
+    public function updateStoryMain($story, $main)
+    {
+        $query = 'UPDATE `story` SET `main`= ?, `count` = `count` + 1, `update` = CURRENT_TIMESTAMP WHERE id = ?';
+        $this->db->query($query, array($main, (int)$story));
     }
 }
