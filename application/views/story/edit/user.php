@@ -331,52 +331,54 @@ desired effect
                     <?php
                     if (count($story) > 0)
                     {
-                    ?>
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">My Story</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <form class="form-horizontal" id="edit_story" action="<?php echo site_url('story/do_edit') . '?id=' . $story['id'] ?>" method="post">
-                            <!-- form start -->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
-                                    </div>
-                                    <div class="form-group">
-                                        <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
-                                            <textarea id="story_main" name="main" class="form-control" rows="10" cols="80" placeholder="Edit your story here ! "><?php echo $story['main'] ?></textarea>
+                        ?>
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">My Story</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <form class="form-horizontal" id="edit_story" action="<?php echo site_url('story/do_edit') . '?id=' . $story['id'] ?>" method="post">
+                                <!-- form start -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
+                                        </div>
+                                        <div class="form-group">
+                                            <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
+                                                <textarea id="story_main" name="main" class="form-control" rows="10" cols="80" placeholder="Edit your story here ! "><?php echo $story['main'] ?></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="box-footer">
-                                <button id="story_cancel" type="button" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-info pull-right">Publish</button>
-                            </div>
-                        </form>
-                        <!-- /.box-body -->
-                        <?php
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="box box-danger">
-                                <div class="box-body">
-                                    <h1 style="text-align: center; color: #424242.;">Sorry</h1>
-                                    <h4 style="text-align: center; color: #424242.;">You do not have permission to alter this story</h4>
-                                    <h4 style="text-align: center; color: #424242.;">Or</h4>
-                                    <h4 style="text-align: center; color: #424242.;">This story is already
-                                        <strong>Finished</strong>
-                                    </h4>
+                                <div class="box-footer">
+                                    <button id="story_cancel" type="button" class="btn btn-default">Cancel</button>
+                                    <button type="submit" class="btn btn-info pull-right">Publish</button>
                                 </div>
-                            </div>
-                            <?php
-                        }
+                            </form>
+                            <!-- /.box-body -->
+                        </div>
+
+                        <?php
+                    }
+                    else
+                    {
                         ?>
-                        <!-- /.box -->
-                    </div>
+                        <div class="box box-danger">
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">Sorry</h1>
+                                <h3 style="text-align: center; color: #424242.;">Possible Indication : </h3>
+                                <h4 style="text-align: center; color: #424242.;">You do not have permission to alter this story</h4>
+                                <h4 style="text-align: center; color: #424242.;">Or</h4>
+                                <h4 style="text-align: center; color: #424242.;">This story is already
+                                    <strong>Finished</strong>
+                                </h4>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <!-- /.box -->
                 </div>
                 <!-- /.row -->
 

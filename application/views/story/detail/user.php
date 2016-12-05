@@ -395,7 +395,7 @@ desired effect
                                     <div class="form-group">
                                         <label for="story_main" class="col-sm-2 control-label">Counselor</label>
                                         <div class="col-sm-10">
-                                            <p class="form-control-static"><?php echo $story['counselor'] == null ? 'None' : $story['name'] . '(' . $story['email'] . ')'
+                                            <p class="form-control-static"><?php echo $story['counselor'] == null ? 'None' : $story['counselor']['username'] . ' ( ' . $story['counselor']['email'] . ' )'
                                                 ?></p>
                                         </div>
                                     </div>
