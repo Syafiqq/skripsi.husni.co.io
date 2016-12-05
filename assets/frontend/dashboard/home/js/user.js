@@ -57,8 +57,18 @@
                 });
         });
 
-
+        $('input.generate-rating').rating({
+            displayOnly: true,
+            size: 'xxs',
+            stars: 10,
+            showCaption: false,
+            showClear: false,
+            max: 10,
+            animate: false
+        });
     });
+
+
     /*
      * Run right away
      * */

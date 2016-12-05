@@ -281,29 +281,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
-<script type="text/javascript">
-    (function ($)
-    {
-
-        $(function ()
-        {
-
-        });
-
-        $('input.generate-rating').rating({
-            displayOnly: true,
-            size: 'xxs',
-            stars: 10,
-            showCaption: false,
-            showClear: false,
-            max: 10,
-            animate: false
-        });
-        /*
-         * Run right away
-         * */
-    })(jQuery);
-</script>
 </body>
 </html>
 
