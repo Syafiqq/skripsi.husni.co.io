@@ -223,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             echo '<th style="width: 10px">#</th>';
                             echo '<th>Title</th>';
                             echo '<th style="width: 220px">Rating</th>';
-                            echo '<th style="width: 40px">Status</th>';
+                            echo '<th style="width: 80px">Status</th>';
                             echo '<th style="width: 40px">Detail</th>';
                             echo '</tr>';
                             foreach ($storiesMetadata as $key => $value)
@@ -240,6 +240,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 echo $value['counselor'] == null ?
                                     '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
                                     '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
+                                echo '&nbsp;&nbsp;';
+                                echo $value['counselor'] != null ? ($value['read'] == 0 ?
+                                    '<abbr title="Unread"><span class="glyphicon glyphicon-floppy-disk text-danger" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Read"><span class="glyphicon glyphicon-floppy-saved text-success" aria-hidden="true"></span></abbr>') : '';
                                 echo '</td>';
                                 echo '<td>';
                                 echo '<form action="' . site_url('story/detail') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '"><button type="submit" class="btn btn-block btn-primary btn-xs goto-detail">';

@@ -93,4 +93,32 @@ class Mstory extends CI_Model
         $query = 'UPDATE `story` SET `counselor`= ? WHERE id = ?';
         $this->db->query($query, array((int)$counselor, (int)$story));
     }
+
+    public function getFollower($user)
+    {
+        $query = 'SELECT count(DISTINCT `user`) AS \'count\' FROM `story` WHERE `counselor` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$user));
+        return $result->result_array();
+    }
+
+    public function getUnreadStory($user)
+    {
+        $query = 'SELECT count(`id`) AS \'count\' FROM `story` WHERE `counselor` = ? AND `read` = 0 LIMIT 1';
+        $result = $this->db->query($query, array((int)$user));
+        return $result->result_array();
+    }
+
+    public function getStorySubmitted($user)
+    {
+        $query = 'SELECT count(`id`) AS \'count\' FROM `story` WHERE `counselor` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$user));
+        return $result->result_array();
+    }
+
+    public function getAllSharedStoriesMetadata($user)
+    {
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published`, `read` FROM `story` WHERE `counselor` = ?';
+        $result = $this->db->query($query, array((int)$user));
+        return $result->result_array();
+    }
 }

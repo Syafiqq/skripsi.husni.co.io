@@ -81,6 +81,24 @@ class Dashboard extends CI_Controller
 
     private function index_counselor()
     {
-        $this->load->view('dashboard/home/counselor', array('user' => $_SESSION['user']['auth'], 'year' => Carbon::now()->year));
+        $this->load->model('mstory');
+        $this->load->model('mauth');
+        $follower = $this->mstory->getFollower($_SESSION['user']['auth']['id']);
+        $unreadStory = $this->mstory->getUnreadStory($_SESSION['user']['auth']['id']);
+        $submittedStory = $this->mstory->getStorySubmitted($_SESSION['user']['auth']['id']);
+        $storiesMetadata = $this->mstory->getAllSharedStoriesMetadata($_SESSION['user']['auth']['id']);
+        foreach ($storiesMetadata as $key => $value)
+        {
+            $storiesMetadata[$key]['user'] = $this->mauth->getNameAndEmail($value['user'])[0];
+        }
+        $this->load->view('dashboard/home/counselor', array(
+            'user' => $_SESSION['user']['auth'],
+            'year' => Carbon::now()->year,
+            'storyTotal' => array(
+                'follow' => $follower[0]['count'],
+                'unread' => $unreadStory[0]['count'],
+                'shared' => $submittedStory[0]['count']),
+            'storiesMetadata' => $storiesMetadata
+        ));
     }
 }
