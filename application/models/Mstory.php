@@ -30,7 +30,7 @@ class Mstory extends CI_Model
 
     public function getAllStoriesMetadata($user)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published` FROM `story` WHERE user = ?';
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published`, `read` FROM `story` WHERE user = ?';
         $result = $this->db->query($query, array((int)$user));
         return $result->result_array();
     }

@@ -61,8 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container">
                 <div class="navbar-header">
                     <a href="<?php echo site_url('dashboard') ?>" class="navbar-brand">
-                        <b>Admin</b>
-                        LTE
+                        <b>Skripsi</b>
                     </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
@@ -70,8 +69,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="<?php echo site_url('dashboard') ?>">Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('story/edit') ?>">Edit
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo site_url('story/share') ?>">Share
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
