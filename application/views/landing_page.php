@@ -59,23 +59,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/login') ?>" class="da-link">Login now</a>
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Join now</a>
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/login') ?>" class="da-link">Login Now</a>
 
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Order Now</a>
+                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Join Now</a>
 
                 </div>
             </div>

@@ -62,11 +62,11 @@
                             <form role="form" action="<?php echo site_url('auth/do_login') ?>" method="post" class="login-form" id="login_form">
                                 <div class="form-group">
                                     <label class="sr-only" for="form-username">Username</label>
-                                    <input type="text" name="email" placeholder="Email..." class="form-username form-control" id="form-username" value="syafiq.rezpector@gmail.com">
+                                    <input type="text" name="email" placeholder="Email..." class="form-username form-control" id="form-username">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-password">Password</label>
-                                    <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password" value="Muhammad_Syafiq">
+                                    <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
                                 </div>
                                 <button type="submit" class="btn">Log in!</button>
                             </form>

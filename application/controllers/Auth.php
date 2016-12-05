@@ -36,14 +36,21 @@ class Auth extends CI_Controller
 
     public function index()
     {
-
+        if (isset($_SESSION['user']['auth']))
+        {
+            redirect('dashboard');
+        }
+        else
+        {
+            redirect('/');
+        }
     }
 
     public function login()
     {
         if (isset($_SESSION['user']['auth']))
         {
-            redirect('/');
+            redirect('dashboard');
         }
         else
         {
@@ -114,7 +121,14 @@ class Auth extends CI_Controller
 
     public function register()
     {
-        $this->load->view('auth/register');
+        if (isset($_SESSION['user']['auth']))
+        {
+            redirect('dashboard');
+        }
+        else
+        {
+            $this->load->view('auth/register');
+        }
     }
 
     public function do_register()

@@ -25,7 +25,13 @@ class Welcome extends CI_Controller
     {
         $this->load->helper('url');
         $this->load->library('session');
-        session_destroy();
-        $this->load->view('landing_page', array('year' => Carbon::now()->year));
+        if (isset($_SESSION['user']['auth']))
+        {
+            redirect('dashboard');
+        }
+        else
+        {
+            $this->load->view('landing_page', array('year' => Carbon::now()->year));
+        }
     }
 }
