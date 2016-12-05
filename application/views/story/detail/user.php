@@ -467,7 +467,7 @@ desired effect
                         <div class="box box-danger">
                             <div class="box-body">
                                 <h1 style="text-align: center; color: #424242.;">Sorry</h1>
-                                <h2 style="text-align: center; color: #424242.;">You do not have permission to read this story.</h2>
+                                <h4 style="text-align: center; color: #424242.;">You do not have permission to read this story.</h4>
                             </div>
                         </div>
                         <?php
