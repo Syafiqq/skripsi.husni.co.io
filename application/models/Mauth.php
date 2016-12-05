@@ -49,4 +49,18 @@ class Mauth extends CI_Model
         $result = $this->db->query($query, array((int)$id));
         return $result->result_array();
     }
+
+    public function getAllCounselor()
+    {
+        $query = 'SELECT `id`, `username`, `email` FROM `user` WHERE `role` = \'counselor\'';
+        $result = $this->db->query($query);
+        return $result->result_array();
+    }
+
+    public function getSpecificUser($id, $role)
+    {
+        $query = 'SELECT `id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar` FROM `user` WHERE `id` = ? AND `role` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$id, $role));
+        return $result->result_array();
+    }
 }

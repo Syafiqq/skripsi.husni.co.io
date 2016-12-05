@@ -24,13 +24,13 @@ class Mstory extends CI_Model
      */
     public function publish($user, $title, $information, $main)
     {
-        $query = 'INSERT INTO `story`(`id`, `user`, `counselor`, `title`, `information`, `main`, `created`, `update`, `count`, `published`) VALUES (NULL, ?, NULL, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 0)';
+        $query = 'INSERT INTO `story`(`id`, `user`, `counselor`, `title`, `information`, `main`, `created`, `update`, `count`, `published`, `read`) VALUES (NULL, ?, NULL, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 0, 0)';
         $this->db->query($query, array((int)$user, $title, $information, $main));
     }
 
     public function getAllStoriesMetadata($user)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published` FROM `story` WHERE user = ?';
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published`, `read` FROM `story` WHERE user = ?';
         $result = $this->db->query($query, array((int)$user));
         return $result->result_array();
     }
@@ -86,5 +86,11 @@ class Mstory extends CI_Model
     {
         $query = 'UPDATE `story` SET `main`= ?, `count` = `count` + 1, `update` = CURRENT_TIMESTAMP WHERE id = ?';
         $this->db->query($query, array($main, (int)$story));
+    }
+
+    public function assignCounselor($story, $counselor)
+    {
+        $query = 'UPDATE `story` SET `counselor`= ? WHERE id = ?';
+        $this->db->query($query, array((int)$counselor, (int)$story));
     }
 }

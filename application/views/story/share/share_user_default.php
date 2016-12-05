@@ -69,51 +69,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="<?php echo site_url('dashboard') ?>">Dashboard
-                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('story/edit') ?>">Edit</a>
+                            <a href="<?php echo site_url('story/edit') ?>">Edit
+                            </a>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url('story/share') ?>">Share</a>
+                        <li class="active">
+                            <a href="<?php echo site_url('story/share') ?>">Share
+                                <span class="sr-only">(current)</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="<?php echo $_avatar ?>" class="user-image" alt="User Image">
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs"><?php echo $user['username'] ?></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="<?php echo $_avatar ?>" class="img-circle" alt="User Image">
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="<?php echo $_avatar ?>" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs"><?php echo $user['username'] ?></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="<?php echo $_avatar ?>" class="img-circle" alt="User Image">
 
-                                <p>
-                                    <?php echo $user['username'] ?>
-                                    <small><?php echo ucfirst($user['role']) ?></small>
-                                </p>
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-right">
-                                    <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                                    <p>
+                                        <?php echo $user['username'] ?>
+                                        <small><?php echo ucfirst($user['role']) ?></small>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-right">
+                                        <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -223,8 +225,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             echo '<th style="width: 10px">#</th>';
                             echo '<th>Title</th>';
                             echo '<th style="width: 220px">Rating</th>';
-                            echo '<th style="width: 40px">Status</th>';
-                            echo '<th style="width: 40px">Detail</th>';
+                            echo '<th style="width: 20px">Status</th>';
+                            echo '<th style="width: 40px">Share</th>';
                             echo '</tr>';
                             foreach ($storiesMetadata as $key => $value)
                             {
@@ -233,19 +235,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 echo "<td>${value['title']}</td>";
                                 echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
                                 echo '<td>';
-                                echo $value['published'] == 1 ?
-                                    '<abbr title="Finished"><span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>';
-                                echo '&nbsp;&nbsp;';
-                                echo $value['counselor'] == null ?
+                                echo $value['counselor'] == null ? ($value['published'] == 1 ?
                                     '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>') :
                                     '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
                                 echo '</td>';
-                                echo '<td>';
-                                echo '<form action="' . site_url('story/detail') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '"><button type="submit" class="btn btn-block btn-primary btn-xs goto-detail">';
-                                echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
-                                echo ' Detail';
-                                echo '</button></form>';
+                                echo '<td>' .
+                                    (($value['published'] == 1) && ($value['counselor'] == null) ? '<form action="' . site_url('story/share') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '">' : '') . '<button type="submit" ' . (($value['published'] == 1) && ($value['counselor'] == null) ? '' : 'disabled="disabled"') . ' class="btn btn-block btn-primary btn-xs goto-detail">' .
+                                    '<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>' .
+                                    ' Share' .
+                                    '</button>' . (($value['published'] == 1) && ($value['counselor'] == null) ? '</form>' : '');
                                 echo '</td>';
                                 echo '</tr>';
                             }
@@ -299,7 +298,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/story/share/js/share_user_default.js') ?>"></script>
 </body>
 </html>
 

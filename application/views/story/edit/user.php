@@ -6,16 +6,22 @@
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
+
 $_avatar = base_url('assets/frontend/avatar/' . ($user['gender'] == 'm' ?
         'm/boy-' . $user['avatar'] . '.png' :
-        'm/girl-' . $user['avatar'] . '.png'));
+        'w/girl-' . $user['avatar'] . '.png'));
 ?>
+
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
 <!doctype html>
 <html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Edit Story</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -34,166 +40,52 @@ $_avatar = base_url('assets/frontend/avatar/' . ($user['gender'] == 'm' ?
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/Ionicons/css/ionicons.min.css') ?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>">
-    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-          page. However, you can choose any other skin. Make sure you
-          apply the skin class to the body tag so the changes take effect.
-    -->
+    <!-- AdminLTE Skins.-->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/story/index/css/user.css') ?>">
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
+    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/story/edit/css/user.css') ?>">
     <!--[if lt IE 9]>
     <script src="<?php echo base_url('assets/frontend/html5boilerplate/js/html5shiv.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/frontend/html5boilerplate/js/respond.min.js') ?>"></script>
     <![endif]-->
-
     <script src="<?php echo base_url('assets/frontend/html5boilerplate/js/vendor/modernizr-2.8.3.min.js') ?>"></script>
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue layout-top-nav layout-boxed  ">
 <div class="wrapper">
 
     <!-- Main Header -->
     <header class="main-header">
 
-        <!-- Logo -->
-        <a href="<?php echo site_url('dashboard') ?>" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
-        </a>
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="<?php echo site_url('dashboard') ?>" class="navbar-brand">
+                        <b>Skripsi</b>
+                    </a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="<?php echo site_url('dashboard') ?>">Dashboard
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo site_url('story/edit') ?>">Edit
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('story/share') ?>">Share</a>
+                        </li>
+                    </ul>
+                </div>
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the messages -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <!-- User Image -->
-                                                <img src="<?php echo $_avatar ?>" class="img-circle" alt="User Image">
-                                            </div>
-                                            <!-- Message title and timestamp -->
-                                            <h4>
-                                                Support Team
-                                                <small>
-                                                    <i class="fa fa-clock-o"></i>
-                                                    5 mins
-                                                </small>
-                                            </h4>
-                                            <!-- The message -->
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li>
-                                    <!-- end message -->
-                                </ul>
-                                <!-- /.menu -->
-                            </li>
-                            <li class="footer">
-                                <a href="#">See All Messages</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- /.messages-menu -->
-
-                    <!-- Notifications Menu -->
-                    <li class="dropdown notifications-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- Inner Menu: contains the notifications -->
-                                <ul class="menu">
-                                    <li><!-- start notification -->
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i>
-                                            5 new members joined today
-                                        </a>
-                                    </li>
-                                    <!-- end notification -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- Tasks Menu -->
-                    <li class="dropdown tasks-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- Inner menu: contains the tasks -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <!-- Task title and progress text -->
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <!-- The progress bar -->
-                                            <div class="progress xs">
-                                                <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-                    </li>
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
@@ -213,18 +105,6 @@ desired effect
                                     <small><?php echo ucfirst($user['role']) ?></small>
                                 </p>
                             </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-6 text-center">
-                                        <a href="#">Students</a>
-                                    </div>
-                                    <div class="col-xs-6 text-center">
-                                        <a href="#">Request</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-right">
@@ -235,8 +115,10 @@ desired effect
                     </li>
                 </ul>
             </div>
+            </div>
         </nav>
     </header>
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
@@ -272,7 +154,7 @@ desired effect
                                 </li>
                             </ul>
                             <a href="<?php echo site_url('story') ?>" class="btn btn-primary btn-block">
-                                <b>Edit a new story</b>
+                                <b>Tell a new story</b>
                             </a>
                         </div>
                         <!-- /.box-body -->
@@ -331,57 +213,58 @@ desired effect
                     <?php
                     if (count($story) > 0)
                     {
-                    ?>
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">My Story</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <form class="form-horizontal" id="edit_story" action="<?php echo site_url('story/do_edit') . '?id=' . $story['id'] ?>" method="post">
-                            <!-- form start -->
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
-                                    </div>
-                                    <div class="form-group">
-                                        <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
-                                            <textarea id="story_main" name="main" class="form-control" rows="10" cols="80" placeholder="Edit your story here ! "><?php echo $story['main'] ?></textarea>
+                        ?>
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">My Story</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <form class="form-horizontal" id="edit_story" action="<?php echo site_url('story/do_edit') . '?id=' . $story['id'] ?>" method="post">
+                                <!-- form start -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
+                                        </div>
+                                        <div class="form-group">
+                                            <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
+                                                <textarea id="story_main" name="main" class="form-control" rows="10" cols="80" placeholder="Edit your story here ! "><?php echo $story['main'] ?></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="box-footer">
-                                <button id="story_cancel" type="button" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-info pull-right">Publish</button>
-                            </div>
-                        </form>
-                        <!-- /.box-body -->
-                        <?php
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="box box-danger">
-                                <div class="box-body">
-                                    <h1 style="text-align: center; color: #424242.;">Sorry</h1>
-                                    <h4 style="text-align: center; color: #424242.;">You do not have permission to alter this story</h4>
-                                    <h4 style="text-align: center; color: #424242.;">Or</h4>
-                                    <h4 style="text-align: center; color: #424242.;">This story is already
-                                        <strong>Finished</strong>
-                                    </h4>
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-info pull-right">Finish</button>
                                 </div>
-                            </div>
-                            <?php
-                        }
+                            </form>
+                            <!-- /.box-body -->
+                        </div>
+
+                        <?php
+                    }
+                    else
+                    {
                         ?>
-                        <!-- /.box -->
-                    </div>
+                        <div class="box box-danger">
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">Sorry</h1>
+                                <h3 style="text-align: center; color: #424242.;">Possible Indication : </h3>
+                                <h4 style="text-align: center; color: #424242.;">You do not have permission to alter this story</h4>
+                                <h4 style="text-align: center; color: #424242.;">Or</h4>
+                                <h4 style="text-align: center; color: #424242.;">This story is already
+                                    <strong>Finished</strong>
+                                </h4>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    <!-- /.box -->
                 </div>
                 <!-- /.row -->
 
         </section>
-        <!-- /. Main content -->
+        <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
@@ -389,7 +272,7 @@ desired effect
     <footer class="main-footer">
         <!-- Default to the left -->
         <strong>Copyright &copy; <?php echo $year ?>
-            <a href="#">Company</a>
+            <a href="<?php echo site_url('dashboard') ?>">Skripsi</a>
                 .
         </strong>
         All rights reserved.
@@ -416,5 +299,4 @@ desired effect
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/story/edit/js/user.js') ?>"></script>
 </body>
 </html>
-
 

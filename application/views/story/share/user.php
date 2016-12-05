@@ -2,7 +2,7 @@
 /**
  * This <skripsi.husni.co.io> project created by :
  * Name         : syafiq
- * Date / Time  : 04 December 2016, 4:28 AM.
+ * Date / Time  : 04 December 2016, 2:02 PM.
  * Email        : syafiq.rezpector@gmail.com
  * Github       : syafiqq
  */
@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Share Story</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -42,6 +42,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/AdminLTE.min.css') ?>">
     <!-- AdminLTE Skins.-->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/css/skins/skin-blue.min.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/bower_components/select2/dist/css/select2.min.css') ?>">
     <!--[if lt IE 9]>
     <script src="<?php echo base_url('assets/frontend/html5boilerplate/js/html5shiv.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/frontend/html5boilerplate/js/respond.min.js') ?>"></script>
@@ -50,7 +51,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition skin-blue layout-top-nav layout-boxed  ">
 <div class="wrapper">
-
 
     <!-- Main Header -->
     <header class="main-header">
@@ -69,16 +69,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="<?php echo site_url('dashboard') ?>">Dashboard
-                                <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('story/edit') ?>">Edit</a>
+                            <a href="<?php echo site_url('story/edit') ?>">Edit
+                            </a>
                         </li>
-                        <li>
-                            <a href="<?php echo site_url('story/share') ?>">Share</a>
+                        <li class="active">
+                            <a href="<?php echo site_url('story/share') ?>">Share
+                                <span class="sr-only">(current)</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -209,64 +211,74 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.col -->
                 <div class="col-md-9">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Stories</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <?php
-                        if (isset($storiesMetadata) && (!empty($storiesMetadata)))
-                        {
-                            echo '<div class="box-body">';
-                            echo '<table class="table table-bordered table-striped">';
-                            echo '<tr>';
-                            echo '<th style="width: 10px">#</th>';
-                            echo '<th>Title</th>';
-                            echo '<th style="width: 220px">Rating</th>';
-                            echo '<th style="width: 40px">Status</th>';
-                            echo '<th style="width: 40px">Detail</th>';
-                            echo '</tr>';
-                            foreach ($storiesMetadata as $key => $value)
-                            {
-                                echo '<tr>';
-                                echo '<td>' . ($key + 1) . '.</td>';
-                                echo "<td>${value['title']}</td>";
-                                echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
-                                echo '<td>';
-                                echo $value['published'] == 1 ?
-                                    '<abbr title="Finished"><span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>';
-                                echo '&nbsp;&nbsp;';
-                                echo $value['counselor'] == null ?
-                                    '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
-                                echo '</td>';
-                                echo '<td>';
-                                echo '<form action="' . site_url('story/detail') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '"><button type="submit" class="btn btn-block btn-primary btn-xs goto-detail">';
-                                echo '<span class="glyphicon glyphicon-search" aria-hidden="true"></span>';
-                                echo ' Detail';
-                                echo '</button></form>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                            echo '</table>';
-                            echo '</div>';
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="box-body">
-                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
-                            </div>
-                            <?php
-                        }
+                    <?php
+                    if ((count($counselors) > 0) && (count($story) > 0) && ($story[0]['counselor'] == null))
+                    {
                         ?>
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Share Story</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <form class="form-horizontal" id="share_story" action="<?php echo site_url('story/do_share') . '?id=' . $story[0]['id'] ?>" method="post">
+                                <!-- form start -->
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-8 col-md-offset-2" style="margin-top: 32px">
+                                            <h4 align="center">Select one of your favourites counselor.</h4>
+                                        </div>
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <div class="form-group">
+                                                <label for="counselor_list">Counselor List :</label>
+                                                <select id="counselor_list" name="counselor" class="form-control select2">
+                                                    <option selected="selected"></option>
+                                                    <?php
+                                                    foreach ($counselors as $counselor)
+                                                    {
+                                                        echo "<option value='${counselor['id']}' >${counselor['username']}( ${counselor['email']} )</option>";
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-info pull-right">Send Request</button>
+                                </div>
+                            </form>
+                        </div>
                         <!-- /.box-body -->
-                    </div>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <div class="box box-danger">
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">Sorry</h1>
+                                <h3 style="text-align: center; color: #424242.;">Possible Indication : </h3>
+                                <h4 style="text-align: center; color: #424242.;">You do not have permission to share this story</h4>
+                                <h4 style="text-align: center; color: #424242.;">Or</h4>
+                                <h4 style="text-align: center; color: #424242.;">This story is not
+                                    <strong>Finished</strong>
+                                                                                 yet.
+                                </h4>
+                                <h4 style="text-align: center; color: #424242.;">Or</h4>
+                                <h4 style="text-align: center; color: #424242.;">This story is
+                                    <strong>Already</strong>
+                                                                                 shared.
+                                </h4>
+                                <h4 style="text-align: center; color: #424242.;">Or</h4>
+                                <h4 style="text-align: center; color: #424242.;">There are no counselors available yet.</h4>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <!-- /.box -->
                 </div>
-            </div>
-            <!-- /.row -->
+                <!-- /.row -->
 
         </section>
         <!-- /.content -->
@@ -293,13 +305,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Bootstrap 3.3.6 -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/user.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/select2/dist/js/select2.full.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/ckeditor/ckeditor.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/story/share/js/user.js') ?>"></script>
 </body>
 </html>
+
 

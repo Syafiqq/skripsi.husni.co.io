@@ -30,6 +30,7 @@
     "Ionicons": "ionicons#^2.0.1",
     "jquery-slimscroll": "https://github.com/rochal/jQuery-slimScroll/archive/v1.3.8.tar.gz",
     "fastclick": "https://github.com/ftlabs/fastclick/archive/v1.0.6.tar.gz",
-    "bootstrap-star-rating": "^4.0.1"
+    "bootstrap-star-rating": "^4.0.1",
+    "select2": "https://github.com/select2/select2/archive/4.0.3.tar.gz"
   }
 }
