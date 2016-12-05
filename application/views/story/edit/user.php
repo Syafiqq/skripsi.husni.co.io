@@ -55,16 +55,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main Header -->
     <header class="main-header">
 
-        <!-- Logo -->
-        <a href="<?php echo site_url('dashboard') ?>" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
-        </a>
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="<?php echo site_url('dashboard') ?>" class="navbar-brand">
+                        <b>Admin</b>
+                        LTE
+                    </a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="<?php echo site_url('dashboard') ?>">Dashboard
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -96,6 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                 </ul>
+            </div>
             </div>
         </nav>
     </header>
@@ -215,7 +228,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                 </div>
                                 <div class="box-footer">
-                                    <button id="story_cancel" type="button" class="btn btn-default">Dashboard</button>
                                     <button type="submit" class="btn btn-info pull-right">Finish</button>
                                 </div>
                             </form>
