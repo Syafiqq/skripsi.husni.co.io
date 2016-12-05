@@ -77,36 +77,6 @@ class Story extends CI_Controller
             )));
     }
 
-    public function do_publish()
-    {
-        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
-        {
-            if (isset($_POST['title']) &&
-                isset($_POST['information']) &&
-                isset($_POST['main'])
-            )
-            {
-                $this->load->model('mstory');
-                $this->mstory->publish($_SESSION['user']['auth']['id'], $_POST['title'], $_POST['information'], $_POST['main']);
-                echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
-                    array('Publishing complete', 'success')
-                ))));
-            }
-            else
-            {
-                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
-                    array('Insufficient Data', 'info')
-                ))));
-            }
-        }
-        else
-        {
-            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
-                array('danger', 'Bad Request')
-            ))));
-        }
-    }
-
     public function detail()
     {
         if (isset($_SESSION['user']['auth']))
@@ -156,6 +126,83 @@ class Story extends CI_Controller
         else
         {
             redirect('/');
+        }
+    }
+
+    public function edit()
+    {
+        if (isset($_SESSION['user']['auth']))
+        {
+            if (isset($_GET['id']))
+            {
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'student' :
+                    {
+                        $this->load->model('mstory');
+                        $storedStory = $this->mstory->getStoredStoryCount($_SESSION['user']['auth']['id']);
+                        $unfinishedStory = $this->mstory->getUnfinishedStoryCount($_SESSION['user']['auth']['id']);
+                        $sharedStory = $this->mstory->getSharedStoryCount($_SESSION['user']['auth']['id']);
+                        $story = $this->mstory->getSpecificStoryData($_SESSION['user']['auth']['id'], $_GET['id']);
+                        if ((count($story) > 0) && ($story[0]['published'] == 0))
+                        {
+                            $story = $story[0];
+                        }
+                        else
+                        {
+                            $story = array();
+                        }
+                        $this->load->view('story/edit/user', array(
+                            'user' => $_SESSION['user']['auth'],
+                            'year' => Carbon::now()->year,
+                            'storyTotal' => array(
+                                'stored' => $storedStory[0]['count'],
+                                'unfinished' => $unfinishedStory[0]['count'],
+                                'shared' => $sharedStory[0]['count']),
+                            'story' => $story));
+                    }
+                        return;
+                }
+                redirect('dashboard');
+            }
+            else
+            {
+                redirect('dashboard');
+            }
+        }
+        else
+        {
+            redirect('/');
+        }
+    }
+
+    public function do_publish()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['title']) &&
+                isset($_POST['information']) &&
+                isset($_POST['main'])
+            )
+            {
+                $this->load->model('mstory');
+                $this->mstory->publish($_SESSION['user']['auth']['id'], $_POST['title'], $_POST['information'], $_POST['main']);
+                echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
+                    array('Publishing complete', 'success')
+                ))));
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('danger', 'Bad Request')
+            ))));
         }
     }
 
@@ -228,6 +275,43 @@ class Story extends CI_Controller
                             array('Story is already finished', 'warning')
                         ))));
                     }
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
+
+    public function do_edit()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['main']) && isset($_GET['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                if (count($story) > 0)
+                {
+                    $this->mstory->updateStoryMain($_GET['id'], $_POST['main']);
+                    echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'redirect' => site_url('story/detail') . '?id=' . $_GET['id'], 'data' => array('notify' => array(
+                        array('Update Successful', 'success')
+                    ))));
                 }
                 else
                 {
