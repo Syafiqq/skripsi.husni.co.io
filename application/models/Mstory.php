@@ -58,7 +58,14 @@ class Mstory extends CI_Model
 
     public function getSpecificStory($user, $storyID)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`, `rating`, `created`, `update`, `count`, `published` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`, `rating`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$user, (int)$storyID));
+        return $result->result_array();
+    }
+
+    public function getSpecificSharedStory($user, $storyID)
+    {
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`, `rating`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `counselor` = ? AND `id` = ? LIMIT 1';
         $result = $this->db->query($query, array((int)$user, (int)$storyID));
         return $result->result_array();
     }
@@ -120,5 +127,11 @@ class Mstory extends CI_Model
         $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published`, `read` FROM `story` WHERE `counselor` = ?';
         $result = $this->db->query($query, array((int)$user));
         return $result->result_array();
+    }
+
+    public function markAsRead($story)
+    {
+        $query = 'UPDATE `story` SET `read`= 1 WHERE id = ?';
+        $this->db->query($query, array((int)$story));
     }
 }
