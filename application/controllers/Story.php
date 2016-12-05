@@ -406,7 +406,7 @@ class Story extends CI_Controller
                     if (count($counselor) > 0)
                     {
                         $this->mstory->assignCounselor($_GET['id'], $_POST['counselor']);
-                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'redirect' => site_url('dashboard') . '?id=' . $_GET['id'], 'data' => array('notify' => array(
+                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'redirect' => site_url('dashboard'), 'data' => array('notify' => array(
                             array('Your story has been shared', 'success')
                         ))));
                     }
