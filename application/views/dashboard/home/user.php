@@ -258,7 +258,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
         <!-- Default to the left -->
         <strong>Copyright &copy; <?php echo $year ?>
-            <a href="#">Company</a>
+            <a href="<?php echo site_url('dashboard') ?>">Skripsi</a>
                 .
         </strong>
         All rights reserved.
