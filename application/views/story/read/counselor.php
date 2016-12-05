@@ -76,38 +76,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                     </ul>
                 </div>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="<?php echo $_avatar ?>" class="user-image" alt="User Image">
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs"><?php echo $user['username'] ?></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="<?php echo $_avatar ?>" class="img-circle" alt="User Image">
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- User Account Menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="<?php echo $_avatar ?>" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs"><?php echo $user['username'] ?></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header">
+                                    <img src="<?php echo $_avatar ?>" class="img-circle" alt="User Image">
 
-                                <p>
-                                    <?php echo $user['username'] ?>
-                                    <small><?php echo ucfirst($user['role']) ?></small>
-                                </p>
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-right">
-                                    <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                                    <p>
+                                        <?php echo $user['username'] ?>
+                                        <small><?php echo ucfirst($user['role']) ?></small>
+                                    </p>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-right">
+                                        <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
         </nav>
     </header>
     <!-- Content Wrapper. Contains page content -->
@@ -198,52 +198,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <!-- /.col -->
                 <div class="col-md-9">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Stories</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <?php
-                        if (isset($storiesMetadata) && (!empty($storiesMetadata)))
-                        {
-                            echo '<div class="box-body">';
-                            echo '<table class="table table-bordered table-striped">';
-                            echo '<tr>';
-                            echo '<th style="width: 10px">#</th>';
-                            echo '<th>Title</th>';
-                            echo '<th style="width: 220px">Rating</th>';
-                            echo '<th style="width: 40px">Detail</th>';
-                            echo '</tr>';
-                            foreach ($storiesMetadata as $key => $value)
-                            {
-                                echo '<tr>';
-                                echo '<td>' . ($key + 1) . '.</td>';
-                                echo "<td><abbr title=\"{$value['user']['username']} ({$value['user']['email']})\">${value['title']}</abbr></td>";
-                                echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
-                                echo '<td>';
-                                echo '<form action="' . site_url('story/read') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '"><button type="submit" class="btn btn-block btn-primary btn-xs goto-detail">';
-                                echo $value['read'] == 0 ?
-                                    '<abbr title="Unread"><span class="glyphicon glyphicon-floppy-disk text-danger" aria-hidden="true"></span></abbr>' :
-                                    '<abbr title="Read"><span class="glyphicon glyphicon-floppy-saved text-success" aria-hidden="true"></span></abbr>';
-                                echo ' Read';
-                                echo '</button></form>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                            echo '</table>';
-                            echo '</div>';
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="box-body">
-                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
-                            </div>
-                            <?php
-                        }
+                    <?php
+                    if (count($story) > 0)
+                    {
                         ?>
-                        <!-- /.box-body -->
-                    </div>
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title pull-left">My Story</h3>
+                                <a id="do_print" class="btn btn-app pull-right">
+                                    <i class="fa fa-print"></i>
+                                    Print
+                                </a>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div id="print_field" class="row">
+                                    <div class="col-md-12">
+                                        <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
+                                    </div>
+                                    <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
+                                        <?php echo $story['main'] ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                <div class="pull-left">
+                                    <?php echo $story['user']['username'] . " ({$story['user']['email']})" ?>
+                                </div>
+                                <div class="pull-right">
+                                    <?php echo "<input id=\"generate-rating\" value=\"${story['rating']}\">" ?>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <div class="box box-danger">
+                            <div class="box-body">
+                                <h1 style="text-align: center; color: #424242.;">Sorry</h1>
+                                <h4 style="text-align: center; color: #424242.;">You do not have permission to read this story.</h4>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <!-- /.box -->
                 </div>
             </div>
@@ -278,9 +279,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jQuery.print/jQuery.print.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/frontend/dashboard/home/js/counselor.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/story/read/js/counselor.js') ?>"></script>
 
 </body>
 </html>

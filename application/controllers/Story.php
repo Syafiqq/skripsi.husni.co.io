@@ -129,6 +129,56 @@ class Story extends CI_Controller
         }
     }
 
+    public function read()
+    {
+        if (isset($_SESSION['user']['auth']))
+        {
+            if (isset($_GET['id']))
+            {
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'counselor' :
+                    {
+                        $this->load->model('mstory');
+                        $this->load->model('mauth');
+                        $follower = $this->mstory->getFollower($_SESSION['user']['auth']['id']);
+                        $unreadStory = $this->mstory->getUnreadStory($_SESSION['user']['auth']['id']);
+                        $submittedStory = $this->mstory->getStorySubmitted($_SESSION['user']['auth']['id']);
+                        $story = $this->mstory->getSpecificSharedStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                        if (count($story) > 0)
+                        {
+                            $story = $story[0];
+                            $this->mstory->markAsRead($story['id']);
+                            $story['user'] = $this->mauth->getNameAndEmail($story['user'])[0];
+                        }
+                        else
+                        {
+                            $story = array();
+                        }
+                        $this->load->view('story/read/counselor', array(
+                            'user' => $_SESSION['user']['auth'],
+                            'year' => Carbon::now()->year,
+                            'storyTotal' => array(
+                                'follow' => $follower[0]['count'],
+                                'unread' => $unreadStory[0]['count'],
+                                'shared' => $submittedStory[0]['count']),
+                            'story' => $story));
+                    }
+                        return;
+                }
+                redirect('dashboard');
+            }
+            else
+            {
+                redirect('dashboard');
+            }
+        }
+        else
+        {
+            redirect('/');
+        }
+    }
+
     public function edit()
     {
         if (isset($_SESSION['user']['auth']))
