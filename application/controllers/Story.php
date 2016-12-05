@@ -176,6 +176,62 @@ class Story extends CI_Controller
         }
     }
 
+    public function share()
+    {
+        if (isset($_SESSION['user']['auth']))
+        {
+            if (isset($_GET['id']))
+            {
+                switch ($_SESSION['user']['auth']['role'])
+                {
+                    case 'student' :
+                    {
+                        $this->load->model('mstory');
+                        $this->load->model('mauth');
+                        $storedStory = $this->mstory->getStoredStoryCount($_SESSION['user']['auth']['id']);
+                        $unfinishedStory = $this->mstory->getUnfinishedStoryCount($_SESSION['user']['auth']['id']);
+                        $sharedStory = $this->mstory->getSharedStoryCount($_SESSION['user']['auth']['id']);
+                        $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                        $counselors = $this->mauth->getAllCounselor();
+                        if (count($story) > 0)
+                        {
+                        }
+                        else
+                        {
+                            $story = array();
+                        }
+                        if (count($counselors) > 0)
+                        {
+                        }
+                        else
+                        {
+                            $counselors = array();
+                        }
+                        $this->load->view('story/share/user', array(
+                            'user' => $_SESSION['user']['auth'],
+                            'year' => Carbon::now()->year,
+                            'storyTotal' => array(
+                                'stored' => $storedStory[0]['count'],
+                                'unfinished' => $unfinishedStory[0]['count'],
+                                'shared' => $sharedStory[0]['count']),
+                            'story' => $story,
+                            'counselors' => $counselors));
+                    }
+                        return;
+                }
+                redirect('dashboard');
+            }
+            else
+            {
+                redirect('dashboard');
+            }
+        }
+        else
+        {
+            redirect('/');
+        }
+    }
+
     public function do_publish()
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
@@ -312,6 +368,54 @@ class Story extends CI_Controller
                     echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'redirect' => site_url('story/detail') . '?id=' . $_GET['id'], 'data' => array('notify' => array(
                         array('Update Successful', 'success')
                     ))));
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
+
+    public function do_share()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['counselor']) && isset($_GET['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                if (count($story) > 0)
+                {
+                    $this->load->model('mauth');
+                    $counselor = $this->mauth->getSpecificUser($_POST['counselor'], 'counselor');
+                    if (count($counselor) > 0)
+                    {
+                        $this->mstory->assignCounselor($_GET['id'], $_POST['counselor']);
+                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'redirect' => site_url('dashboard') . '?id=' . $_GET['id'], 'data' => array('notify' => array(
+                            array('Your story has been shared', 'success')
+                        ))));
+                    }
+                    else
+                    {
+                        echo json_encode(array('code' => 402, 'message' => 'Invalid Counselor', 'data' => array('notify' => array(
+                            array('Invalid Counselor', 'warning')
+                        ))));
+                    }
                 }
                 else
                 {
