@@ -114,7 +114,7 @@
                                 {
                                     setTimeout(function ()
                                     {
-                                        location.href = window.location.protocol + '//' + window.location.host + '/dashboard'
+                                        location.href = window.location.protocol + '//' + window.location.host + '/index.php/dashboard'
                                     }, 2000);
                                 }
                             }

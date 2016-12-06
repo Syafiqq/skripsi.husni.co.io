@@ -99,7 +99,7 @@
                                 }
                                 else
                                 {
-                                    location.href = window.location.protocol + '//' + window.location.host + '/dashboard'
+                                    location.href = window.location.protocol + '//' + window.location.host + '/index.php/dashboard'
                                 }
                             }, 2000);
                         }
@@ -119,7 +119,7 @@
 
         $('button#story_cancel').on('click', function ()
         {
-            window.location.href = window.location.protocol + '//' + window.location.host + '/dashboard';
+            window.location.href = window.location.protocol + '//' + window.location.host + '/index.php/dashboard';
         })
     });
 
