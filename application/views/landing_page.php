@@ -43,6 +43,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="header">
         <div class="wrap">
             <header id="topnav">
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="<?php echo site_url('auth/register') ?>" class="scroll">Sign Up</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('auth/login') ?>" class="scroll">Sign In</a>
+                        </li>
+                        <div class="clear"></div>
+                    </ul>
+                </nav>
                 <h1>
                     <a href="<?php echo site_url('test/notebookweb') ?>">Skripsi</a>
                 </h1>
@@ -59,23 +70,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/login') ?>" class="da-link">Login now</a>
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Join now</a>
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/login') ?>" class="da-link">Login Now</a>
 
                 </div>
                 <div class="da-slide">
                     <h2>Best Ideas Start On Paper</h2>
                     <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                    <a href="<?php echo site_url('auth/register') ?>" class="da-link">Join Now</a>
 
                 </div>
             </div>
@@ -101,7 +108,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="footer-con">
             <div class="footer-left">
                 <p> <?php echo $year; ?> &#169; Template by
-                    <a href="#">W3layouts</a>
+                    <a href="https://w3layouts.com/">W3layouts</a>
                 </p>
             </div>
             <div class="clear"></div>
@@ -132,10 +139,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script type="text/javascript">
     jQuery(document).ready(function ($)
     {
-        $(".scroll").click(function (event)
+        $('a.scroll').on('click', function (event)
         {
             event.preventDefault();
-            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1200);
+            location.href = $(this).attr('href');
         });
     });
 </script>
