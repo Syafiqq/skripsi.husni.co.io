@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 04 December 2016, 1:59 PM.
  * Email        : syafiq.rezpector@gmail.com
@@ -340,12 +340,12 @@ class Story extends CI_Controller
         {
             if (isset($_POST['title']) &&
                 isset($_POST['information']) &&
-                isset($_POST['main'])
+                isset($_POST['rating'])
             )
             {
                 $this->load->model('mstory');
-                $this->mstory->publish($_SESSION['user']['auth']['id'], $_POST['title'], $_POST['information'], $_POST['main']);
-                echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
+                $this->mstory->publish($_SESSION['user']['auth']['id'], $_POST['title'], $_POST['information'], $_POST['rating']);
+                echo json_encode(array('code' => 200, 'message' => 'Accepted', 'redirect' => site_url('dashboard'), 'data' => array('notify' => array(
                     array('Publishing complete', 'success')
                 ))));
             }
@@ -360,52 +360,6 @@ class Story extends CI_Controller
         {
             echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
                 array('danger', 'Bad Request')
-            ))));
-        }
-    }
-
-    public function do_updaterating()
-    {
-        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
-        {
-            if (isset($_POST['value']) && isset($_GET['id']))
-            {
-                $this->load->model('mstory');
-                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
-                if (count($story) > 0)
-                {
-                    if (($_POST['value'] >= 0.0) && ($_POST['value'] <= 10.0))
-                    {
-                        $this->mstory->updateRating($_GET['id'], $_POST['value']);
-                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'data' => array('notify' => array(
-                            array('Update Successful', 'success')
-                        ))));
-                    }
-                    else
-                    {
-                        echo json_encode(array('code' => 402, 'message' => 'Invalid Rating', 'data' => array('notify' => array(
-                            array('Invalid Rating', 'warning')
-                        ))));
-                    }
-                }
-                else
-                {
-                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
-                        array('Invalid Story', 'warning')
-                    ))));
-                }
-            }
-            else
-            {
-                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
-                    array('Insufficient Data', 'info')
-                ))));
-            }
-        }
-        else
-        {
-            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
-                array('Update Rating Error', 'danger')
             ))));
         }
     }
@@ -460,13 +414,21 @@ class Story extends CI_Controller
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
         {
-            if (isset($_POST['main']) && isset($_GET['id']))
+            if (isset($_POST['main']) &&
+                isset($_POST['main2']) &&
+                isset($_POST['main3']) &&
+                isset($_POST['main4']) &&
+                isset($_POST['main5']) &&
+                isset($_POST['main6']) &&
+                isset($_POST['rating']) &&
+                isset($_GET['id'])
+            )
             {
                 $this->load->model('mstory');
                 $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
                 if (count($story) > 0)
                 {
-                    $this->mstory->updateStoryMain($_GET['id'], $_POST['main']);
+                    $this->mstory->updateStoryMain($_GET['id'], $_POST['main'], $_POST['main2'], $_POST['main3'], $_POST['main4'], $_POST['main5'], $_POST['main6'], $_POST['rating']);
                     echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'redirect' => site_url('story/detail') . '?id=' . $_GET['id'], 'data' => array('notify' => array(
                         array('Update Successful', 'success')
                     ))));
@@ -494,6 +456,157 @@ class Story extends CI_Controller
     }
 
     public function do_share()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_POST['id']);
+                if (count($story) > 0)
+                {
+                    $this->load->model('mauth');
+                    $this->load->model('mmember');
+                    $_counselorID = $this->mmember->getCounselor($_SESSION['user']['auth']['id']);
+                    if (count($_counselorID))
+                    {
+                        $counselor = $this->mauth->getSpecificUser($_counselorID[0]['counselor'], 'counselor');
+                        if (count($counselor) > 0)
+                        {
+                            $this->mstory->assignCounselor($_POST['id'], $_counselorID[0]['counselor']);
+                            echo json_encode(array('code' => 200, 'redirect' => site_url('dashboard'), 'message' => 'Update Successful', 'data' => array('notify' => array(
+                                array('Your story has been shared', 'success')
+                            ))));
+                        }
+                        else
+                        {
+                            echo json_encode(array('code' => 402, 'message' => 'Invalid Counselor', 'data' => array('notify' => array(
+                                array('Invalid Counselor', 'warning')
+                            ))));
+                        }
+                    }
+                    else
+                    {
+                        echo json_encode(array('code' => 402, 'message' => 'Invalid Counselor', 'data' => array('notify' => array(
+                            array('Invalid Counselor', 'warning')
+                        ))));
+                    }
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
+
+    private function ___do_updaterating()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['value']) && isset($_GET['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                if (count($story) > 0)
+                {
+                    if (($_POST['value'] >= 0.0) && ($_POST['value'] <= 10.0))
+                    {
+                        $this->mstory->updateRating($_GET['id'], $_POST['value']);
+                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'data' => array('notify' => array(
+                            array('Update Successful', 'success')
+                        ))));
+                    }
+                    else
+                    {
+                        echo json_encode(array('code' => 402, 'message' => 'Invalid Rating', 'data' => array('notify' => array(
+                            array('Invalid Rating', 'warning')
+                        ))));
+                    }
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
+
+    private function ___do_updaterating2()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            if (isset($_POST['value']) && isset($_GET['id']))
+            {
+                $this->load->model('mstory');
+                $story = $this->mstory->getSpecificStory($_SESSION['user']['auth']['id'], $_GET['id']);
+                if (count($story) > 0)
+                {
+                    if (($_POST['value'] >= 0.0) && ($_POST['value'] <= 10.0))
+                    {
+                        $this->mstory->updateRating2($_GET['id'], $_POST['value']);
+                        echo json_encode(array('code' => 200, 'message' => 'Update Successful', 'data' => array('notify' => array(
+                            array('Update Successful', 'success')
+                        ))));
+                    }
+                    else
+                    {
+                        echo json_encode(array('code' => 402, 'message' => 'Invalid Rating', 'data' => array('notify' => array(
+                            array('Invalid Rating', 'warning')
+                        ))));
+                    }
+                }
+                else
+                {
+                    echo json_encode(array('code' => 402, 'message' => 'Invalid Story', 'data' => array('notify' => array(
+                        array('Invalid Story', 'warning')
+                    ))));
+                }
+            }
+            else
+            {
+                echo json_encode(array('code' => 402, 'message' => 'Insufficient Data', 'data' => array('notify' => array(
+                    array('Insufficient Data', 'info')
+                ))));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('Update Rating Error', 'danger')
+            ))));
+        }
+    }
+
+    private function ___do_share()
     {
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
         {

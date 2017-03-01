@@ -32,6 +32,8 @@
     "fastclick": "https://github.com/ftlabs/fastclick/archive/v1.0.6.tar.gz",
     "bootstrap-star-rating": "^4.0.1",
     "select2": "https://github.com/select2/select2/archive/4.0.3.tar.gz",
-    "jQuery.print": "https://github.com/DoersGuild/jQuery.print/archive/1.5.0.tar.gz"
+    "jQuery.print": "https://github.com/DoersGuild/jQuery.print/archive/1.5.0.tar.gz",
+    "emojione": "^2.2.7",
+    "ckeditor-emojione": "^1.0.1"
   }
 }

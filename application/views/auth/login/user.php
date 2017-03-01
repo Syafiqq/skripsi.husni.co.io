@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 03 December 2016, 6:13 PM.
  * Email        : syafiq.rezpector@gmail.com
@@ -14,7 +14,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Masuk Aplikasi</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -51,8 +51,8 @@
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
-                                <h3>Hello User</h3>
-                                <p>Login to our site</p>
+                                <h3>Hello Siswa</h3>
+                                <p>Masuk pada aplikasi</p>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-lock"></i>
@@ -68,7 +68,7 @@
                                     <label class="sr-only" for="form-password">Password</label>
                                     <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
                                 </div>
-                                <button type="submit" class="btn">Log in!</button>
+                                <button type="submit" class="btn">Masuk!</button>
                             </form>
                         </div>
                     </div>
@@ -76,7 +76,14 @@
                         <div class="social-login-buttons">
                             <a class="btn btn-link-2" href="<?php echo site_url('auth/login') . '?role=counselor' ?>">
                                 <i class="fa fa-eye"></i>
-                                I'm Counselor !
+                                Masuk Sebagai Konselor!
+                            </a>
+                        </div>
+                    </div>
+                    <div class="social-login">
+                        <div class="social-login-buttons">
+                            <a class="btn btn-link-1" href="<?php echo site_url('dashboard') ?>">
+                                Kembali ke Halaman Depan
                             </a>
                         </div>
                     </div>

@@ -24,12 +24,12 @@ class Mauth extends CI_Model
      */
     public function login($email, $password, $role)
     {
-        $query = 'SELECT `id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar` FROM `user` WHERE `email` = ? AND `password` = ? AND `role` = ? LIMIT 1';
+        $query = 'SELECT `id`, `username`, `kelas`, `email`, `role`, `gender`, `password`, `status`, `avatar` FROM `user` WHERE `email` = ? AND `password` = ? AND `role` = ? LIMIT 1';
         $result = $this->db->query($query, array($email, md5(md5($password)), $role));
         return $result->result_array();
     }
 
-    public function register($username, $email, $role, $gender, $password, $status)
+    public function register($username, $kelas, $email, $role, $gender, $password, $status)
     {
         if ($gender == 'm')
         {
@@ -39,13 +39,14 @@ class Mauth extends CI_Model
         {
             $avatar = mt_rand(0, 26);
         }
-        $query = 'INSERT INTO `user`(`id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)';
-        $this->db->query($query, array($username, $email, $role, (string)$gender, md5(md5($password)), $status, (int)$avatar));
+        $query = 'INSERT INTO `user`(`id`, `username`, `kelas`, `email`, `role`, `gender`, `password`, `status`, `avatar`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $this->db->query($query, array($username, $kelas, $email, $role, (string)$gender, md5(md5($password)), $status, (int)$avatar));
+        return $this->db->insert_id();
     }
 
     public function getNameAndEmail($id)
     {
-        $query = 'SELECT `id`, `username`, `email` FROM `user` WHERE `id` = ?';
+        $query = 'SELECT `id`, `username`,`kelas`, `email` FROM `user` WHERE `id` = ?';
         $result = $this->db->query($query, array((int)$id));
         return $result->result_array();
     }
@@ -59,8 +60,15 @@ class Mauth extends CI_Model
 
     public function getSpecificUser($id, $role)
     {
-        $query = 'SELECT `id`, `username`, `email`, `role`, `gender`, `password`, `status`, `avatar` FROM `user` WHERE `id` = ? AND `role` = ? LIMIT 1';
+        $query = 'SELECT `id`, `username`, `kelas`, `email`, `role`, `gender`, `password`, `status`, `avatar` FROM `user` WHERE `id` = ? AND `role` = ? LIMIT 1';
         $result = $this->db->query($query, array((int)$id, $role));
+        return $result->result_array();
+    }
+
+    public function getChatInformation($id)
+    {
+        $query = 'SELECT `username`, `email`, `role`, `gender`, `avatar` FROM `user` WHERE `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$id));
         return $result->result_array();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 02 December 2016, 8:57 PM.
  * Email        : syafiq.rezpector@gmail.com
@@ -17,7 +17,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>The Notebook Website Template | Home :: w3layouts</title>
+    <title>Menulis Ekspresif</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
@@ -32,6 +32,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="<?php echo base_url('assets/frontend/html5boilerplate/js/respond.min.js') ?>"></script>
     <![endif]-->
 
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/welcome/landing_page/css/slider.css') ?>"/>
     <link href="<?php echo base_url('assets/frontend/welcome/landing_page/css/style.css') ?>" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/welcome/landing_page/css/magnific-popup.css') ?>">
 
@@ -46,18 +47,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <nav>
                     <ul>
                         <li>
-                            <a href="<?php echo site_url('auth/register') ?>" class="scroll">Sign Up</a>
+                            <a href="<?php echo site_url('auth/profile_page') ?>" class="scroll">Profil Pengembang</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('auth/login') ?>" class="scroll">Sign In</a>
+                            <a href="<?php echo site_url('auth/register') ?>" class="scroll">Daftar Akun</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('auth/login') ?>" class="scroll">Masuk Aplikasi</a>
                         </li>
                         <div class="clear"></div>
                     </ul>
                 </nav>
                 <h1>
-                    <a href="<?php echo site_url('test/notebookweb') ?>">Skripsi</a>
+                    <a href="<?php echo site_url('test/notebookweb') ?>">Ekspresikan Dirimu</a>
                 </h1>
-                <a href="#" id="navbtn">Nav Menu</a>
+                <a href="#" id="navbtn">Menu Navigasi</a>
                 <div class="clear"></div>
             </header>
         </div>
@@ -68,26 +72,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <!---start-da-slider----->
             <div id="da-slider" class="da-slider">
                 <div class="da-slide">
-                    <h2>Best Ideas Start On Paper</h2>
-                    <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
+                    <h2>Emosi</h2>
+                    <p>Emosi adalah luapan perasaan yang sedang dialami oleh seseorang. Emosi itu bukan hanya marah loh, tetapi juga sedih, senang, takut, bahagia juga termasuk emosi. </p>
                 </div>
                 <div class="da-slide">
-                    <h2>Best Ideas Start On Paper</h2>
-                    <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
-                </div>
-                <div class="da-slide">
-                    <h2>Best Ideas Start On Paper</h2>
-                    <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
+                    <h2>Emosi yang Sering Muncul dalam Diri Kita</h2>
+                    <p>
+                        <img width="" height="" alt="" src="<?php echo base_url('assets/emotions.png'); ?>" class="">
+                    </p>
 
                 </div>
+
                 <div class="da-slide">
-                    <h2>Best Ideas Start On Paper</h2>
-                    <p>Revolvationary notebook with eco-friendly paper,advanced surface technology and degital sharing integration.</p>
+                    <h2>Pengelolaan Emosi</h2>
+                    <p>Pengelolaan emosi adalah cara untuk mengendalikan dan mengekspresikan luapan perasaan yang sedang dialami oleh seseorang. </p>
+                </div>
+                <div class="da-slide">
+                    <h2>Expressive Writing (Menulis Ekspresif)</h2>
+                    <p>Expressive writing (menulis ekspresif) adalah kegiatan menulis yang dilakukan untuk mengekspresikan emosi, entah itu emosi senang, sedih, takut, dan marah yang berasal dari pengalaman hidup dimasa lalu dan sekarang.</p>
 
                 </div>
+                <nav class="da-arrows">
+                    <span class="da-arrows-prev"></span>
+                    <span class="da-arrows-next"></span>
+                </nav>
             </div>
             <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/jquery.cslider.js') ?>"></script>
-            <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/welcome/landing_page/css/slider.css') ?>"/>
             <script type="text/javascript" src="<?php echo base_url('assets/frontend/welcome/landing_page/js/modernizr.custom.28468.js') ?>"></script>
             <script type="text/javascript">
                 $(function ()

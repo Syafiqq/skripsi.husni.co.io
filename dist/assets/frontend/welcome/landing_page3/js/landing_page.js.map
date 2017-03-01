@@ -1,0 +1,16 @@
+{
+  "version": 3,
+  "sources": [
+    "../../../../../../assets/frontend/welcome/landing_page3/js/landing_page.js"
+  ],
+  "names": [
+    "$",
+    "backstretch",
+    "jQuery"
+  ],
+  "mappings": ";;AAAA;;;;;;;;AAQA,CAAC,UAAUA,CAAV,EACD;AACI;;;AAGAA,IAAEC,WAAF,CAAc,2DAAd;;AAEAD,IAAE,YACF,CAGC,CAJD;AAKA;;;AAGH,CAfD,EAeGE,MAfH",
+  "file": "landing_page.js",
+  "sourcesContent": [
+    "/**\n * This <skripsi.husni.co.io> project created by :\n * Name         : syafiq\n * Date / Time  : 24 February 2017, 1:14 PM.\n * Email        : syafiq.rezpector@gmail.com\n * Github       : syafiqq\n */\n\n(function ($)\n{\n    /*\n     Fullscreen background\n     */\n    $.backstretch(\"/assets/frontend/welcome/landing_page/images/sliderbg.jpg\");\n\n    $(function ()\n    {\n\n\n    });\n    /*\n     * Run right away\n     * */\n})(jQuery);"
+  ]
+}

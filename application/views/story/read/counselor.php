@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 04 December 2016, 4:28 AM.
  * Email        : syafiq.rezpector@gmail.com
@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Daftar Kisah</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container">
                 <div class="navbar-header">
                     <a href="<?php echo site_url('dashboard') ?>" class="navbar-brand">
-                        <b>Skripsi</b>
+                        <b>Menulis Ekspresif</b>
                     </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
@@ -70,7 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="<?php echo site_url('dashboard') ?>">Dashboard
+                            <a href="<?php echo site_url('dashboard') ?>">Daftar Kisah
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -101,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-right">
-                                        <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                                        <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" onclick="location.href='<?php echo base_url(); ?>dashboard'" class="btn btn-default btn-flat">Keluar Akun</a>
                                     </div>
                                 </li>
                             </ul>
@@ -132,15 +132,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Student Followed</b>
+                                    <b>Siswa Bimbingan</b>
                                     <a class="pull-right"><?php echo number_format(isset($storyTotal['follow']) ? $storyTotal['follow'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Unread</b>
+                                    <b>Kisah yang belum dibaca</b>
                                     <a class="pull-right"><?php echo number_format(isset($storyTotal['unread']) ? $storyTotal['unread'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Shared</b>
+                                    <b>Kisah yang diterima</b>
                                     <a class="pull-right"><?php echo number_format(isset($storyTotal['shared']) ? $storyTotal['shared'] : 0, 0, ',', '.') ?></a>
                                 </li>
                             </ul>
@@ -152,7 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- About Me Box -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
+                            <h3 class="box-title">Tentang Saya</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -169,7 +169,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <strong>
                                 <i class="fa fa-envelope margin-r-5"></i>
-                                Email
+                                Akun
                             </strong>
 
                             <p class="text-muted"><?php echo $user['email'] ?></p>
@@ -178,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <strong>
                                 <i class="fa fa-eye<?php echo $user['role'] == 'counselor' ? '' : '-slash' ?> margin-r-5"></i>
-                                Role
+                                Status
                             </strong>
 
                             <p class="text-muted"><?php echo $user['role'] == 'counselor' ? ucfirst($user['role']) : 'Student' ?></p>
@@ -187,7 +187,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <strong>
                                 <i class="fa fa-pencil-square-o margin-r-5"></i>
-                                Status
+                                Data Diri Saya
                             </strong>
 
                             <p><?php echo $user['status'] ?></p>
@@ -201,69 +201,131 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <?php
                     if (count($story) > 0)
                     {
-                        ?>
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title pull-left">My Story</h3>
-                                <a id="do_print" class="btn btn-app pull-right">
-                                    <i class="fa fa-print"></i>
-                                    Print
-                                </a>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <div id="print_field" class="row">
-                                    <div class="col-md-12">
-                                        <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
-                                    </div>
-                                    <div style="margin-top: 32px; margin-bottom: 32px" class="col-md-10 col-md-offset-1">
-                                        <?php echo $story['main'] ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-footer">
-                                <div class="pull-left">
-                                    <?php echo $story['user']['username'] . " ({$story['user']['email']})" ?>
-                                </div>
-                                <div class="pull-right">
-                                    <?php echo "<input id=\"generate-rating\" value=\"${story['rating']}\">" ?>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <?php
-                    }
-                    else
-                    {
-                        ?>
-                        <div class="box box-danger">
-                            <div class="box-body">
-                                <h1 style="text-align: center; color: #424242.;">Sorry</h1>
-                                <h4 style="text-align: center; color: #424242.;">You do not have permission to read this story.</h4>
-                            </div>
-                        </div>
-                        <?php
-                    }
                     ?>
-                    <!-- /.box -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title pull-left">Kisahku...</h3>
+                            <a id="do_print" class="btn btn-app pull-right">
+                                <i class="fa fa-print"></i>
+                                Cetak
+                            </a>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="print_field" class="row">
+                                <div class="col-md-12">
+                                    <h3 style="text-align: center"><?php echo $story['title'] ?></h3>
+                                </div>
+                                <div style="text-align: center">
+                                    <p>Kelas: <?php echo " {$story['user']['kelas']}" ?></p>
+                                    <p>Email: <?php echo " {$story['user']['email']}" ?> </p>
+                                </div>
+                                <div style="text-align: center">
+                                    <?php echo "<input id=\"generate-rating\" value=\"${story['rating']}\">" ?>
+                                    <div style="text-align: center">
+                                        <?php echo "<input id=\"generate-rating\" value=\"${story['rating2']}\">" ?>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 32px; margin-bottom: 32px text-align:left" class="col-md-10 col-md-offset-1">
+                                    <p>a. Kejadian apa yang kamu alami ???</p>
+                                    <?php echo $story['main'] ?>
+                                </div>
+                                <div style="margin-top: 32px; margin-bottom: 32px text-align:left" class="col-md-10 col-md-offset-1">
+                                    <p>b. Emosi apa yang kamu rasakan ???</p>
+                                    <?php echo $story['main2'] ?>
+                                </div>
+                                <div style="margin-top: 32px; margin-bottom: 32px text-align:left" class="col-md-10 col-md-offset-1">
+                                    <p>c. Apa yang menyebabkan kamu merasakan emosi itu ???</p>
+                                    <?php echo $story['main3'] ?>
+                                </div>
+                                <div style="margin-top: 32px; margin-bottom: 32px text-align:left" class="col-md-10 col-md-offset-1">
+                                    <p>d. Apa yang kamu lakukan saat merasakan emosi tersebut ???</p>
+                                    <?php echo $story['main4'] ?>
+                                </div>
+                                <div style="margin-top: 32px; margin-bottom: 32px text-align:left" class="col-md-10 col-md-offset-1">
+                                    <p>e. Apakah dengan menulis membuat kamu lebih baik ???</p>
+                                    <?php echo $story['main5'] ?>
+                                </div>
+                                <div style="margin-top: 32px; margin-bottom: 32px text-align:left" class="col-md-10 col-md-offset-1">
+                                    <p>f. Jika jawaban kamu Ya, maka kamu berhasil mengekspresikan emosimu ...</p>
+                                    <p>g. Jika jawabanmu Tidak, apa yang sebaiknya kamu lakukan agar bisa menjadi lebih baik ??? </p>
+                                    <?php echo $story['main6'] ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DIRECT CHAT PRIMARY -->
+                    <div class="box box-primary direct-chat direct-chat-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Ulasan</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <!-- Conversations are loaded here -->
+                            <div class="direct-chat-messages">
+                                <div style="overflow-y: auto; padding: 12px" id="chat_container">
+                                </div>
+                                <!-- /.direct-chat-msg -->
+                            </div>
+                            <!--/.direct-chat-messages-->
+                            <!-- /.direct-chat-pane -->
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <form action="<?php echo site_url("chat/sendc?id={$story['id']}") ?>" method="post" id="form_chat">
+                                <div class="input-group">
+                                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-primary btn-flat">Send</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.box-footer-->
+                    </div>
+                    <!-- /.box-body -->
                 </div>
+                <?php
+                }
+                else
+                {
+                    ?>
+                    <div class="box box-danger">
+                        <div class="box-body">
+                            <h1 style="text-align: center; color: #424242.;">Maaf</h1>
+                            <h4 style="text-align: center; color: #424242.;">Anda tidak diperkenankan membaca kisah ini.</h4>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+                <!-- /.box -->
             </div>
-            <!-- /.row -->
-
-        </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+    <!-- /.row -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- Default to the left -->
-        <strong>Copyright &copy; <?php echo $year ?>
-            <a href="<?php echo site_url('dashboard') ?>">Skripsi</a>
-                .
-        </strong>
-        All rights reserved.
-    </footer>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Main Footer -->
+<footer class="main-footer">
+    <!-- Default to the left -->
+    <strong>Copyright &copy; <?php echo $year ?>
+        <a href="<?php echo site_url('dashboard') ?>">Menulis Ekspresif</a>
+            .
+    </strong>
+    All rights reserved.
+</footer>
 </div>
 <!-- ./wrapper -->
 
@@ -276,12 +338,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/tether/dist/js/tether.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-serialize-object/dist/jquery.serialize-object.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/bootstrap-star-rating/js/star-rating.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/AdminLTE/dist/js/app.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jQuery.print/jQuery.print.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/bower_components/fastclick/lib/fastclick.js') ?>"></script>
+<script type="text/javascript">
+    var storyID = "<?php echo $story['id']?>";
+</script>
 <script type="text/javascript" src="<?php echo base_url('assets/frontend/story/read/js/counselor.js') ?>"></script>
 
 </body>

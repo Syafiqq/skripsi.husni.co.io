@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 03 December 2016, 6:07 PM.
  * Email        : syafiq.rezpector@gmail.com
@@ -133,11 +133,14 @@ class Auth extends CI_Controller
 
     public function do_register()
     {
+        log_message('ERROR', var_export($_POST, true));
         if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
         {
             if (isset($_POST['username']) &&
+                isset($_POST['kelas']) &&
                 isset($_POST['email']) &&
                 isset($_POST['role']) &&
+                isset($_POST['choosen_counselor']) &&
                 isset($_POST['gender']) &&
                 isset($_POST['password']) &&
                 isset($_POST['status'])
@@ -151,13 +154,46 @@ class Auth extends CI_Controller
                     {
                         $_POST['gender'] = strtolower($_POST['gender']);
                         $this->load->model('mauth');
-                        $result = $this->mauth->login($_POST['email'], $_POST['password'], isset($_POST['role']) ? $_POST['role'] : 'student');
+                        $result = $this->mauth->login($_POST['email'], $_POST['password'], $_POST['role']);
                         if (count($result) == 0)
                         {
-                            $this->mauth->register($_POST['username'], $_POST['email'], $_POST['role'], $_POST['gender'], $_POST['password'], $_POST['status']);
-                            echo json_encode(array('code' => 200, 'message' => 'Accepted', 'data' => array('notify' => array(
-                                array('Authentication complete', 'success')
+                            $_POST['kelas'] = strlen($_POST['kelas']) == 0 ? '-' : $_POST['kelas'];
+                            $id = $this->mauth->register($_POST['username'], $_POST['kelas'], $_POST['email'], $_POST['role'], $_POST['gender'], $_POST['password'], $_POST['status']);
+                            log_message('ERROR', 'GATE 1 ' . var_export($id, true));
+
+                            if ($_POST['role'] == 'student')
+                            {
+                                log_message('ERROR', 'GATE 2 STUDENT');
+                                if (is_numeric($id))
+                                {
+                                    log_message('ERROR', 'GATE 3 IS NUMERIC ' . var_export($_POST['choosen_counselor'], true));
+
+                                    $counselor = $this->mauth->getSpecificUser($_POST['choosen_counselor'], 'counselor');
+                                    log_message('ERROR', 'GATE 4 ' . var_export($counselor, true));
+                                    if (is_array($counselor) && (count($counselor) > 0))
+                                    {
+                                        log_message('ERROR', 'GATE 5 EXISTS');
+
+                                        $this->load->model('mmember');
+                                        $this->mmember->add($id, $_POST['choosen_counselor']);
+                                        echo json_encode(array('code' => 200, 'message' => 'Accepted', 'redirect' => site_url('auth/login'), 'data' => array('notify' => array(
+                                            array('Authentication complete', 'success')
+                                        ))));
+                                        return;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                echo json_encode(array('code' => 200, 'message' => 'Accepted', 'redirect' => site_url('auth/login'), 'data' => array('notify' => array(
+                                    array('Authentication complete', 'success')
+                                ))));
+                                return;
+                            }
+                            echo json_encode(array('code' => 401, 'message' => 'Error', 'data' => array('notify' => array(
+                                array('Error', 'danger')
                             ))));
+
                         }
                         else
                         {
@@ -195,6 +231,7 @@ class Auth extends CI_Controller
         }
     }
 
+
     public function do_signout()
     {
         session_destroy();
@@ -202,4 +239,21 @@ class Auth extends CI_Controller
             array('Sign out successfully', 'success')
         ))));
     }
+
+    public function get_counselor_data()
+    {
+        if ($this->input->is_ajax_request() && ($_SERVER['REQUEST_METHOD'] === 'POST'))
+        {
+            $this->load->model('mauth');
+            $counselors = $this->mauth->getAllCounselor();
+            echo json_encode($counselors);
+        }
+        else
+        {
+            echo json_encode(array('code' => 401, 'message' => 'Bad Request', 'data' => array('notify' => array(
+                array('danger', 'Bad Request')
+            ))));
+        }
+    }
+
 }

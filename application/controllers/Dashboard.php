@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 04 December 2016, 3:50 AM.
  * Email        : syafiq.rezpector@gmail.com

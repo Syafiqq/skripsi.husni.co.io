@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 04 December 2016, 1:18 AM.
  * Email        : syafiq.rezpector@gmail.com
@@ -8,13 +8,14 @@
  */
 ?>
 <!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
 <html lang="en">
 
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Register</title>
+    <title>Daftar Akun</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -43,15 +44,14 @@
 
 <!-- Top content -->
 <div class="top-content">
-
     <div class="inner-bg">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-6 col-md-offset-3">
                     <div class="form-box">
                         <div class="form-top">
                             <div class="form-top-left">
-                                <h3>Sign up now</h3>
+                                <h3>Daftarkan Diri Anda</h3>
                             </div>
                             <div class="form-top-right">
                                 <i class="fa fa-pencil"></i>
@@ -60,27 +60,37 @@
                         <div class="form-bottom">
                             <form id="register" role="form" action="<?php echo site_url('auth/do_register') ?>" method="post" class="registration-form">
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-first-name">First name</label>
-                                    <input type="text" name="username" placeholder="Username.." class="form-first-name form-control" id="form-first-name">
+                                    <label class="sr-only" for="form-first-name">Nama</label>
+                                    <input type="text" name="username" placeholder="Nama Lengkap" class="form-first-name form-control" id="form-first-name">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-email">Email</label>
-                                    <input type="text" name="email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                    <input type="text" name="email" placeholder="Email " class="form-email form-control" id="form-email">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-select">Role...</label>
-                                    <select name="role" class="form-select form-control" id="form-select">
-                                        <option value="">Role...</option>
-                                        <option value="student">Student</option>
-                                        <option value="counselor">Counselor</option>
+                                    <select name="role" class="form-select form-control" id="form-select_role">
+                                        <option value="">Status</option>
+                                        <option value="student">Siswa</option>
+                                        <option value="counselor">Konselor</option>
+                                    </select>
+                                </div>
+                                <div id="class_layout" style="display: none" class="form-group">
+                                    <label class="sr-only" for="form-kelas">Kelas</label>
+                                    <input type="text" name="kelas" placeholder="Kelas" class="form-kelas form-control" id="form-kelas">
+                                </div>
+                                <div class="form-group" id="choosen_counselor" style="display: none">
+                                    <label class="sr-only" for="form-select">Pilih Counselor Anda</label>
+                                    <select name="choosen_counselor" class="form-select form-control" id="form-select_choosen_counselor">
+                                        <option value="">Pilih Konselor Anda</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-select">Gender...</label>
-                                    <select name="gender" class="form-select form-control" id="form-select">
-                                        <option value="">Gender...</option>
-                                        <option value="m">Men</option>
-                                        <option value="w">Women</option>
+                                    <label class="sr-only" for="form-select">Jenis Kelamin</label>
+                                    <select name="gender" class="form-select form-control" id="form-select_gender">
+                                        <option value="">Jenis Kelamin...</option>
+                                        <option value="m">Laki-Laki</option>
+                                        <option value="w">Perempuan</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -88,12 +98,20 @@
                                     <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="form-password">
                                 </div>
                                 <div class="form-group">
-                                    <label class="sr-only" for="form-about-yourself">About yourself</label>
-                                    <textarea name="status" placeholder="About yourself..."
+                                    <label class="sr-only" for="form-about-yourself">Data Diri Saya (Gambaran Singkat diri Anda)</label>
+                                    <textarea name="status" placeholder="Data Diri Saya (Gambaran Singkat diri Anda)..."
                                               class="form-about-yourself form-control" id="form-about-yourself"></textarea>
                                 </div>
-                                <button type="submit" class="btn">Sign me up!</button>
+                                <button type="submit" class="btn">Daftar Sekarang</button>
                             </form>
+
+                        </div>
+                    </div>
+                    <div class="social-login">
+                        <div class="social-login-buttons">
+                            <a class="btn btn-link-1" href="<?php echo site_url('dashboard') ?>">
+                                Kembali ke Halaman Depan
+                            </a>
                         </div>
                     </div>
                 </div>

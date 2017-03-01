@@ -1,5 +1,5 @@
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 04 December 2016, 8:08 AM.
  * Email        : syafiq.rezpector@gmail.com
@@ -58,19 +58,30 @@
 
 
         });
-        CKEDITOR.replace('story_main');
+        CKEDITOR.replace('story_information');
 
-        $('input[type="text"], input[type="password"], textarea').on('focus', function ()
+        $('input[type="text"], input[type="password"], input#generate-rating, textarea').on('focus', function ()
         {
             $(this).removeClass('input-error');
+        });
+
+        $('input#generate-rating').rating({
+            displayOnly: false,
+            size: 'sm',
+            stars: 10,
+            showCaption: false,
+            showClear: false,
+            max: 10,
+            min: 1,
+            animate: true
         });
 
         $("form#tell_story").on('submit', function (event)
         {
             event.preventDefault();
             var form = $(this);
-            var gate = true;
-            form.find('input[type="text"], textarea#story_information').each(function ()
+            var gate = CKEDITOR.instances.story_information.getData().length > 0;
+            form.find('input[type="text"]').each(function ()
             {
                 if ($(this).val() == "")
                 {
@@ -86,7 +97,7 @@
                 if (gate)
                 {
                     var data_sent = form.serializeObject();
-                    data_sent['main'] = CKEDITOR.instances.story_main.getData();
+                    data_sent['information'] = CKEDITOR.instances.story_information.getData();
                     console.log(data_sent);
                     $.ajax({
                         type: form.attr('method'),
@@ -112,10 +123,14 @@
                             {
                                 if (data['code'] == 200)
                                 {
-                                    setTimeout(function ()
+                                    if (data.hasOwnProperty('redirect'))
                                     {
-                                        location.href = window.location.protocol + '//' + window.location.host + '/dashboard'
-                                    }, 2000);
+                                        setTimeout(function ()
+                                        {
+                                            location.href = data['redirect'];
+                                            //location.href = window.location.protocol + '//' + window.location.host + '/emosi.ekspresif/dashboard'
+                                        }, 2000);
+                                    }
                                 }
                             }
 
@@ -133,9 +148,10 @@
             });
         });
 
+
         $('button#story_cancel').on('click', function ()
         {
-            window.location.href = window.location.protocol + '//' + window.location.host + '/dashboard';
+            window.location.href = window.location.protocol + '//' + window.location.host + '/emosi.ekspresif/dashboard';
         })
     });
 

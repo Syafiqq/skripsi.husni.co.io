@@ -1,0 +1,22 @@
+{
+  "version": 3,
+  "sources": [
+    "../../../../assets/frontend/ckeditor/config.js"
+  ],
+  "names": [
+    "CKEDITOR",
+    "editorConfig",
+    "config",
+    "toolbarGroups",
+    "name",
+    "groups",
+    "removeButtons",
+    "format_tags",
+    "removeDialogTabs"
+  ],
+  "mappings": ";;AAAA;;;;;AAKAA,SAASC,YAAT,GAAwB,UAAUC,MAAV,EACxB;AACI;AACA;AACA;;AAEA;AACAA,WAAOC,aAAP,GAAuB,CACnB,EAACC,MAAM,WAAP,EAAoBC,QAAQ,CAAC,WAAD,EAAc,MAAd,CAA5B,EADmB,EAEnB,EAACD,MAAM,SAAP,EAAkBC,QAAQ,CAAC,MAAD,EAAS,WAAT,EAAsB,cAAtB,CAA1B,EAFmB,EAGnB,EAACD,MAAM,OAAP,EAHmB,EAInB,EAACA,MAAM,QAAP,EAJmB,EAKnB,EAACA,MAAM,OAAP,EALmB,EAMnB,EAACA,MAAM,OAAP,EANmB,EAOnB,EAACA,MAAM,UAAP,EAAmBC,QAAQ,CAAC,MAAD,EAAS,UAAT,EAAqB,UAArB,CAA3B,EAPmB,EAQnB,EAACD,MAAM,QAAP,EARmB,EASnB,GATmB,EAUnB,EAACA,MAAM,aAAP,EAAsBC,QAAQ,CAAC,aAAD,EAAgB,SAAhB,CAA9B,EAVmB,EAWnB,EAACD,MAAM,WAAP,EAAoBC,QAAQ,CAAC,MAAD,EAAS,QAAT,EAAmB,QAAnB,EAA6B,OAA7B,EAAsC,MAAtC,CAA5B,EAXmB,EAYnB,EAACD,MAAM,QAAP,EAZmB,EAanB,EAACA,MAAM,QAAP,EAbmB,EAcnB,EAACA,MAAM,OAAP,EAdmB,CAAvB;;AAiBA;AACA;AACAF,WAAOI,aAAP,GAAuB,iCAAvB;;AAEA;AACAJ,WAAOK,WAAP,GAAqB,gBAArB;;AAEA;AACAL,WAAOM,gBAAP,GAA0B,8BAA1B;AACH,CAjCD",
+  "file": "config.js",
+  "sourcesContent": [
+    "/**\n * @license Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.\n * For licensing, see LICENSE.md or http://ckeditor.com/license\n */\n\nCKEDITOR.editorConfig = function (config)\n{\n    // Define changes to default configuration here.\n    // For complete reference see:\n    // http://docs.ckeditor.com/#!/api/CKEDITOR.config\n\n    // The toolbar groups arrangement, optimized for two toolbar rows.\n    config.toolbarGroups = [\n        {name: 'clipboard', groups: ['clipboard', 'undo']},\n        {name: 'editing', groups: ['find', 'selection', 'spellchecker']},\n        {name: 'links'},\n        {name: 'insert'},\n        {name: 'forms'},\n        {name: 'tools'},\n        {name: 'document', groups: ['mode', 'document', 'doctools']},\n        {name: 'others'},\n        '/',\n        {name: 'basicstyles', groups: ['basicstyles', 'cleanup']},\n        {name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi']},\n        {name: 'styles'},\n        {name: 'colors'},\n        {name: 'about'}\n    ];\n\n    // Remove some buttons provided by the standard plugins, which are\n    // not needed in the Standard(s) toolbar.\n    config.removeButtons = 'Underline,Subscript,Superscript';\n\n    // Set the most common block elements.\n    config.format_tags = 'p;h1;h2;h3;pre';\n\n    // Simplify the dialog windows.\n    config.removeDialogTabs = 'image:advanced;link:advanced';\n};\n"
+  ]
+}

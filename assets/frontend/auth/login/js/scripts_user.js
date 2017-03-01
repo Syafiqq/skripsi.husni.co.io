@@ -4,7 +4,8 @@
      Fullscreen background
      */
     //$.backstretch("../assets/frontend/test/authentication/assets/img/backgrounds/1.jpg");
-    $.backstretch(window.location.protocol + "//" + window.location.host + "/assets/frontend/auth/login/img/backgrounds/user.jpeg");
+    //$.backstretch("../assets/frontend/auth/login/img/backgrounds/user.jpeg");
+    $.backstretch("../assets/frontend/auth/login/img/backgrounds/user.jpg");
 
     $(function ()
     {
@@ -73,7 +74,7 @@
                         .fail(function ()
                         {
                             $.notify({
-                                message: 'Error', url: window.location.protocol + '//' + window.location.host
+                                message: 'Error', url: window.location.protocol + '//' + window.location.host 
                             }, {
                                 // settings
                                 type: 'danger'

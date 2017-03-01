@@ -20,17 +20,18 @@ class Mstory extends CI_Model
      * @param int $user
      * @param string $title
      * @param string $information
-     * @param string $main
+     * @param float $rating
      */
-    public function publish($user, $title, $information, $main)
+    public function publish($user, $title, $information, $rating)
     {
-        $query = 'INSERT INTO `story`(`id`, `user`, `counselor`, `title`, `information`, `main`, `created`, `update`, `count`, `published`, `read`) VALUES (NULL, ?, NULL, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 0, 0)';
-        $this->db->query($query, array((int)$user, $title, $information, $main));
+        $query = 'INSERT INTO `story`(`id`, `user`, `counselor`, `title`, `information`, `rating`, `rating2`, `main`, `main2`, `main3`, `main4`, `main5`, `main6`, `count`, `read`, `published`, `update`, `created`)
+                              VALUES (NULL, ?, NULL, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)';
+        $this->db->query($query, array((int)$user, $title, $information, (float)$rating, (float)$rating, "", "", "", "", "", ""));
     }
 
     public function getAllStoriesMetadata($user)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published`, `read` FROM `story` WHERE user = ?';
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `rating2`, `published`, `read` FROM `story` WHERE user = ?';
         $result = $this->db->query($query, array((int)$user));
         return $result->result_array();
     }
@@ -58,21 +59,28 @@ class Mstory extends CI_Model
 
     public function getSpecificStory($user, $storyID)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`, `rating`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`,`main2`, `main3`, `main4`, `main5`, `main6`, `rating`, `rating2`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
         $result = $this->db->query($query, array((int)$user, (int)$storyID));
+        return $result->result_array();
+    }
+
+    public function getSpecificStoryForCounselor($counselor, $storyID)
+    {
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`,`main2`, `main3`, `main4`, `main5`, `main6`, `rating`, `rating2`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `counselor` = ? AND `id` = ? LIMIT 1';
+        $result = $this->db->query($query, array((int)$counselor, (int)$storyID));
         return $result->result_array();
     }
 
     public function getSpecificSharedStory($user, $storyID)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`, `rating`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `counselor` = ? AND `id` = ? LIMIT 1';
+        $query = 'SELECT `id`, `user`, `counselor`, `title`, `information`, `main`,`main2`, `main3`, `main4`, `main5`, `main6`, `rating`, `rating2`, `created`, `update`, `count`, `published`, `read` FROM `story` WHERE `counselor` = ? AND `id` = ? LIMIT 1';
         $result = $this->db->query($query, array((int)$user, (int)$storyID));
         return $result->result_array();
     }
 
     public function getSpecificStoryData($user, $storyID)
     {
-        $query = 'SELECT `id`, `title`, `main`, `published` FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
+        $query = 'SELECT `id`, `title`, `main`, `main2`, `main3`, `main4`, `main5`, `main6`, `published`, rating2 FROM `story` WHERE `user` = ? AND `id` = ? LIMIT 1';
         $result = $this->db->query($query, array((int)$user, (int)$storyID));
         return $result->result_array();
     }
@@ -83,16 +91,22 @@ class Mstory extends CI_Model
         $this->db->query($query, array((float)round($value, 1, PHP_ROUND_HALF_UP), (int)$story));
     }
 
+    public function updateRating2($story, $value)
+    {
+        $query = 'UPDATE `story` SET `rating2`= ? WHERE id = ?';
+        $this->db->query($query, array((float)round($value, 1, PHP_ROUND_HALF_UP), (int)$story));
+    }
+	
     public function do_publish($story)
     {
         $query = 'UPDATE `story` SET `published`= 1 WHERE id = ?';
         $this->db->query($query, array((int)$story));
     }
 
-    public function updateStoryMain($story, $main)
+    public function updateStoryMain($story, $main, $main2, $main3, $main4, $main5, $main6, $rating)
     {
-        $query = 'UPDATE `story` SET `main`= ?, `count` = `count` + 1, `update` = CURRENT_TIMESTAMP WHERE id = ?';
-        $this->db->query($query, array($main, (int)$story));
+        $query = 'UPDATE `story` SET `main` = ?, `main2` = ?, `main3` = ?, `main4` = ?, `main5` = ? , `main6` = ?, `count` = `count` + 1, `update` = CURRENT_TIMESTAMP, `rating2` = ? WHERE id = ?';
+        $this->db->query($query, array($main, $main2, $main3, $main4, $main5, $main6, (float)$rating, (int)$story));
     }
 
     public function assignCounselor($story, $counselor)
@@ -124,7 +138,8 @@ class Mstory extends CI_Model
 
     public function getAllSharedStoriesMetadata($user)
     {
-        $query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `published`, `read` FROM `story` WHERE `counselor` = ?';
+        //$query = 'SELECT `id`, `user`, `counselor`, `title`, `rating`, `rating2`, `published`, `read` FROM `story` WHERE `counselor` = ?';
+        $query = 'SELECT `story`.`id`, `story`.`user`, `story`.`counselor`, `story`.`title`, `story`.`update`, `story`.`rating2`, `story`.`published`, `story`.`read` FROM `story` RIGHT OUTER JOIN `member` ON `member`.`student` = `story`.`user` WHERE `member`.`counselor` = ? AND `story`.`published` = 1';
         $result = $this->db->query($query, array((int)$user));
         return $result->result_array();
     }

@@ -31,7 +31,21 @@ class Welcome extends CI_Controller
         }
         else
         {
-            $this->load->view('landing_page', array('year' => Carbon::now()->year));
+            $this->load->view('landing_page1', array('year' => Carbon::now()->year));
+        }
+    }
+
+    public function profile_page()
+    {
+        $this->load->helper('url');
+        $this->load->library('session');
+        if (isset($_SESSION['user']['auth']))
+        {
+            redirect('dashboard');
+        }
+        else
+        {
+            $this->load->view('profil_page1');
         }
     }
 }

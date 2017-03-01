@@ -1,6 +1,6 @@
 <?php
 /**
- * This <skripsi.husni.co.io> project created by :
+ * This <emosi.ekspresif> project created by :
  * Name         : syafiq
  * Date / Time  : 04 December 2016, 4:28 AM.
  * Email        : syafiq.rezpector@gmail.com
@@ -21,7 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Dashboard</title>
+    <title>Daftar Kisah</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container">
                 <div class="navbar-header">
                     <a href="<?php echo site_url('dashboard') ?>" class="navbar-brand">
-                        <b>Skripsi</b>
+                        <b>Menulis Ekspresif</b>
                     </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
@@ -70,15 +70,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="<?php echo site_url('dashboard') ?>">Dashboard
+                            <a href="<?php echo site_url('dashboard') ?>">Daftar Kisah
                             </a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('story/edit') ?>">Edit
+                            <a href="<?php echo site_url('story/edit') ?>">Lengkapi Kisahmu
                             </a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo site_url('story/share') ?>">Share
+                            <a href="<?php echo site_url('story/share') ?>">Bagikan Kisahmu
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-right">
-                                        <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                                        <a id="sign-out" href="<?php echo site_url('auth/do_signout') ?>" onclick="location.href='<?php echo base_url(); ?>dashboard'" class="btn btn-default btn-flat">Keluar Akun</a>
                                     </div>
                                 </li>
                             </ul>
@@ -142,21 +142,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Story Stored</b>
+                                    <b>Kisah Tersimpan</b>
                                     <a class="pull-right"><?php echo number_format(isset($storyTotal['stored']) ? $storyTotal['stored'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Unfinished</b>
+                                    <b>Kisah yang belum terselesaikan</b>
                                     <a class="pull-right"><?php echo number_format(isset($storyTotal['unfinished']) ? $storyTotal['unfinished'] : 0, 0, ',', '.') ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Story Shared</b>
+                                    <b>Kisah yang dibagikan</b>
                                     <a class="pull-right"><?php echo number_format(isset($storyTotal['shared']) ? $storyTotal['shared'] : 0, 0, ',', '.') ?></a>
                                 </li>
                             </ul>
-                            <a href="<?php echo site_url('story') ?>" class="btn btn-primary btn-block">
-                                <b>Tell a new story</b>
-                            </a>
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -165,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- About Me Box -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
+                            <h3 class="box-title">Tentang Saya</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -181,8 +179,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <hr>
 
                             <strong>
+                                <i class="fa fa-id-card margin-r-5"></i>
+                                Kelas
+                            </strong>
+
+                            <p class="text-muted">
+                                <?php echo $user['kelas'] ?>
+                            </p>
+
+                            <hr>
+
+                            <strong>
                                 <i class="fa fa-envelope margin-r-5"></i>
-                                Email
+                                Akun
                             </strong>
 
                             <p class="text-muted"><?php echo $user['email'] ?></p>
@@ -191,7 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <strong>
                                 <i class="fa fa-eye<?php echo $user['role'] == 'counselor' ? '' : '-slash' ?> margin-r-5"></i>
-                                Role
+                                Status
                             </strong>
 
                             <p class="text-muted"><?php echo $user['role'] == 'counselor' ? ucfirst($user['role']) : 'Student' ?></p>
@@ -200,7 +209,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                             <strong>
                                 <i class="fa fa-pencil-square-o margin-r-5"></i>
-                                Status
+                                Data Diri Saya
                             </strong>
 
                             <p><?php echo $user['status'] ?></p>
@@ -213,7 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="col-md-9">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Stories</h3>
+                            <h3 class="box-title">Kisahku</h3>
                         </div>
                         <!-- /.box-header -->
                         <?php
@@ -223,10 +232,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             echo '<table class="table table-bordered table-striped">';
                             echo '<tr>';
                             echo '<th style="width: 10px">#</th>';
-                            echo '<th>Title</th>';
-                            echo '<th style="width: 220px">Rating</th>';
+                            echo '<th>Emosi Kisah</th>';
+                            echo '<th style="width: 220px">Skor Awal</th>';
+                            echo '<th style="width: 220px">Skor Akhir</th>';
                             echo '<th style="width: 20px">Status</th>';
-                            echo '<th style="width: 40px">Share</th>';
                             echo '</tr>';
                             foreach ($storiesMetadata as $key => $value)
                             {
@@ -234,17 +243,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 echo '<td>' . ($key + 1) . '.</td>';
                                 echo "<td>${value['title']}</td>";
                                 echo "<td><input class=\"generate-rating\" value=\"${value['rating']}\"></td>";
+                                echo "<td><input class=\"generate-rating\" value=\"${value['rating2']}\"></td>";
                                 echo '<td>';
                                 echo $value['counselor'] == null ? ($value['published'] == 1 ?
                                     '<abbr title="Not shared to anyone"><span class="glyphicon glyphicon-eye-close text-danger" aria-hidden="true"></span></abbr>' :
                                     '<abbr title="Unfinished"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span></abbr>') :
                                     '<abbr title="Shared to Counselor"><span class="glyphicon glyphicon-eye-open text-success" aria-hidden="true"></span></abbr>';
+                                echo "&nbsp;&nbsp;";
+                                echo $value['counselor'] != null ? ($value['read'] == 0 ?
+                                    '<abbr title="Unread"><span class="glyphicon glyphicon-floppy-disk text-danger" aria-hidden="true"></span></abbr>' :
+                                    '<abbr title="Read"><span class="glyphicon glyphicon-floppy-saved text-success" aria-hidden="true"></span></abbr>') : '';
                                 echo '</td>';
-                                echo '<td>' .
-                                    (($value['published'] == 1) && ($value['counselor'] == null) ? '<form action="' . site_url('story/share') . '" method="get"><input type="hidden" name="id" value="' . $value['id'] . '">' : '') . '<button type="submit" ' . (($value['published'] == 1) && ($value['counselor'] == null) ? '' : 'disabled="disabled"') . ' class="btn btn-block btn-primary btn-xs goto-detail">' .
-                                    '<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>' .
-                                    ' Share' .
-                                    '</button>' . (($value['published'] == 1) && ($value['counselor'] == null) ? '</form>' : '');
                                 echo '</td>';
                                 echo '</tr>';
                             }
@@ -255,7 +264,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         {
                             ?>
                             <div class="box-body">
-                                <h1 style="text-align: center; color: #424242.;">There are no story</h1>
+                                <h1 style="text-align: center; color: #424242.;">Tidak ada kisah...</h1>
                             </div>
                             <?php
                         }

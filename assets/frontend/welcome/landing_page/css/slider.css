@@ -1,15 +1,19 @@
 .da-slider {
     width: 100%;
-    height: 520px;
+    min-width: 520px;
+    height: 400px;
     position: relative;
+    margin: 30px auto;
     overflow: hidden;
-    /*background: url(../images/sprite.png);*/
-    -webkit-transition: background-position 1s ease-out 0.3s;
-    -moz-transition: background-position 1s ease-out 0.3s;
-    -o-transition: background-position 1s ease-out 0.3s;
-    -ms-transition: background-position 1s ease-out 0.3s;
-    transition: background-position 1s ease-out 0.3s;
-    text-align: center;
+    background: transparent url(../images/waves.gif) repeat 0% 0%;
+    border-top: 8px solid #efc34a;
+    border-bottom: 8px solid #efc34a;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2), 0px -2px 1px #fff;
+    -webkit-transition: background-position 1.4s ease-in-out 0.3s;
+    -moz-transition: background-position 1.4s ease-in-out 0.3s;
+    -o-transition: background-position 1.4s ease-in-out 0.3s;
+    -ms-transition: background-position 1.4s ease-in-out 0.3s;
+    transition: background-position 1.4s ease-in-out 0.3s;
 }
 
 .da-slide {
@@ -18,8 +22,8 @@
     height: 100%;
     top: 0px;
     left: 0px;
+    font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
     text-align: left;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .da-slide-current {
@@ -33,16 +37,14 @@
 .da-slider-fb .da-slide.da-slide-current {
     left: 0px;
 }
-
 .da-slide h2,
 .da-slide p,
 .da-slide .da-link,
 .da-slide .da-img {
     position: absolute;
     opacity: 0;
-    left: 130%;
+    left: 110%;
 }
-
 .da-slider-fb .da-slide h2,
 .da-slider-fb .da-slide p,
 .da-slider-fb .da-slide .da-link {
@@ -56,73 +58,159 @@
 }
 
 .da-slide h2 {
-    color: #FFFFFF;
-    width: 80%;
-    top: 105px;
+    color: #fff;
+    font-size: 66px;
+    width: 50%;
+    top: 60px;
     white-space: nowrap;
     z-index: 10;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-    font-weight: 600;
-    text-align: center;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2.5em;
-
-}
-
-.da-slide h2 > img {
-    vertical-align: middle;
-    width: 12px;
-    height: 12px;
-    margin: 10px;
+    font-family: 'Economica', Arial, sans-serif;
+    font-weight: 700;
 }
 
 .da-slide p {
-    top: 178px;
-    color: #FFFFFF;
-    font-size: 1.2em;
-    height: 83px;
+    width: 45%;
+    top: 155px;
+    color: #916c05;
+    font-size: 18px;
+    line-height: 26px;
+    height: 80px;
     overflow: hidden;
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.9em;
-    text-align: center;
-    width: 53%;
-    margin: 0 10em;
-
-}
-
-.da-img {
-    display: none;
+    font-style: italic;
+    font-family: 'Economica', Arial, sans-serif;
+    font-weight: 400;
+    font-style: italic;
 }
 
 .da-slide .da-img {
     text-align: center;
     width: 30%;
-    top: 51px;
+    top: 70px;
     height: 256px;
     line-height: 320px;
     left: 110%; /*60%*/
 }
 
 .da-slide .da-link {
-    top: 308px;
-    display: inline-block;
-    color: #FFF;
-    font-size: 1.2em;
-    background: #91A8AE;
-    padding: 17px 3.5em;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    margin: 0em 20em;
-    -moz-border-radius: 4px;
-    -o-border-radius: 4px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    top: 270px; /*depends on p height*/
+    border-radius: 30px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    border: 8px solid rgba(255, 255, 255, 0.8);
+    padding: 2px 20px 0px;
+    font-size: 18px;
+    line-height: 30px;
+    width: 80px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.da-link:hover {
-    background: #62919C;
+.da-slide .da-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.da-dots {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: 0px;
+    bottom: 20px;
+    z-index: 2000;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.da-dots span {
+    display: inline-block;
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e4b42d;
+    margin: 3px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset,
+    1px 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.da-dots span.da-dots-current:after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    background: rgb(255, 255, 255);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(47%, rgba(246, 246, 246, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    background: linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+}
+
+.da-arrows {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.da-arrows span {
+    position: absolute;
+    top: 50%;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #e4b42d;
+    cursor: pointer;
+    z-index: 2000;
+    opacity: 0;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1) inset,
+    1px 1px 1px rgba(255, 255, 255, 0.1);
+    -webkit-transition: opacity 0.4s ease-in-out 0.2s;
+    -moz-transition: opacity 0.4s ease-in-out 0.2s;
+    -o-transition: opacity 0.4s ease-in-out 0.2s;
+    -ms-transition: opacity 0.4s ease-in-out 0.2s;
+    transition: opacity 0.4s ease-in-out 0.2s;
+}
+
+.da-slider:hover .da-arrows span {
+    opacity: 1;
+}
+
+.da-arrows span:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    left: 5px;
+    background: transparent url(../images/arrows.png) no-repeat top left;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.da-arrows span:hover:after {
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.da-arrows span:active:after {
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.da-arrows span.da-arrows-next:after {
+    background-position: top right;
+}
+
+.da-arrows span.da-arrows-prev {
+    left: 15px;
+}
+
+.da-arrows span.da-arrows-next {
+    right: 15px;
 }
 
 .da-slide-current h2,
@@ -136,40 +224,39 @@
     left: 60%;
     opacity: 1;
 }
-
 /* Animation classes and animations */
 
 /* Slide in from the right*/
 .da-slide-fromright h2 {
-    -webkit-animation: fromRightAnim1 0.6s ease-in-out 0.8s both;
-    -moz-animation: fromRightAnim1 0.6s ease-in-out 0.8s both;
-    -o-animation: fromRightAnim1 0.6s ease-in-out 0.8s both;
-    -ms-animation: fromRightAnim1 0.6s ease-in-out 0.8s both;
-    animation: fromRightAnim1 0.6s ease-in-out 0.8s both;
+    -webkit-animation: fromRightAnim1 0.6s ease-in 0.8s both;
+    -moz-animation: fromRightAnim1 0.6s ease-in 0.8s both;
+    -o-animation: fromRightAnim1 0.6s ease-in 0.8s both;
+    -ms-animation: fromRightAnim1 0.6s ease-in 0.8s both;
+    animation: fromRightAnim1 0.6s ease-in 0.8s both;
 }
 
 .da-slide-fromright p {
-    -webkit-animation: fromRightAnim2 0.6s ease-in-out 0.8s both;
-    -moz-animation: fromRightAnim2 0.6s ease-in-out 0.8s both;
-    -o-animation: fromRightAnim2 0.6s ease-in-out 0.8s both;
-    -ms-animation: fromRightAnim2 0.6s ease-in-out 0.8s both;
-    animation: fromRightAnim2 0.6s ease-in-out 0.8s both;
+    -webkit-animation: fromRightAnim2 0.6s ease-in 0.8s both;
+    -moz-animation: fromRightAnim2 0.6s ease-in 0.8s both;
+    -o-animation: fromRightAnim2 0.6s ease-in 0.8s both;
+    -ms-animation: fromRightAnim2 0.6s ease-in 0.8s both;
+    animation: fromRightAnim2 0.6s ease-in 0.8s both;
 }
 
 .da-slide-fromright .da-link {
-    -webkit-animation: fromRightAnim3 0.4s ease-in-out 1.2s both;
-    -moz-animation: fromRightAnim3 0.4s ease-in-out 1.2s both;
-    -o-animation: fromRightAnim3 0.4s ease-in-out 1.2s both;
-    -ms-animation: fromRightAnim3 0.4s ease-in-out 1.2s both;
-    animation: fromRightAnim3 0.4s ease-in-out 1.2s both;
+    -webkit-animation: fromRightAnim3 0.4s ease-in 1.2s both;
+    -moz-animation: fromRightAnim3 0.4s ease-in 1.2s both;
+    -o-animation: fromRightAnim3 0.4s ease-in 1.2s both;
+    -ms-animation: fromRightAnim3 0.4s ease-in 1.2s both;
+    animation: fromRightAnim3 0.4s ease-in 1.2s both;
 }
 
 .da-slide-fromright .da-img {
-    -webkit-animation: fromRightAnim4 0.6s ease-in-out 0.8s both;
-    -moz-animation: fromRightAnim4 0.6s ease-in-out 0.8s both;
-    -o-animation: fromRightAnim4 0.6s ease-in-out 0.8s both;
-    -ms-animation: fromRightAnim4 0.6s ease-in-out 0.8s both;
-    animation: fromRightAnim4 0.6s ease-in-out 0.8s both;
+    -webkit-animation: fromRightAnim4 0.6s ease-in 0.8s both;
+    -moz-animation: fromRightAnim4 0.6s ease-in 0.8s both;
+    -o-animation: fromRightAnim4 0.6s ease-in 0.8s both;
+    -ms-animation: fromRightAnim4 0.6s ease-in 0.8s both;
+    animation: fromRightAnim4 0.6s ease-in 0.8s both;
 }
 
 @-webkit-keyframes fromRightAnim1 {
@@ -411,38 +498,37 @@
         opacity: 1;
     }
 }
-
 /* Slide in from the left*/
 .da-slide-fromleft h2 {
-    -webkit-animation: fromLeftAnim1 0.6s ease-in-out 0.6s both;
-    -moz-animation: fromLeftAnim1 0.6s ease-in-out 0.6s both;
-    -o-animation: fromLeftAnim1 0.6s ease-in-out 0.6s both;
-    -ms-animation: fromLeftAnim1 0.6s ease-in-out 0.6s both;
-    animation: fromLeftAnim1 0.6s ease-in-out 0.6s both;
+    -webkit-animation: fromLeftAnim1 0.6s ease-in 0.6s both;
+    -moz-animation: fromLeftAnim1 0.6s ease-in 0.6s both;
+    -o-animation: fromLeftAnim1 0.6s ease-in 0.6s both;
+    -ms-animation: fromLeftAnim1 0.6s ease-in 0.6s both;
+    animation: fromLeftAnim1 0.6s ease-in 0.6s both;
 }
 
 .da-slide-fromleft p {
-    -webkit-animation: fromLeftAnim2 0.6s ease-in-out 0.6s both;
-    -moz-animation: fromLeftAnim2 0.6s ease-in-out 0.6s both;
-    -o-animation: fromLeftAnim2 0.6s ease-in-out 0.6s both;
-    -ms-animation: fromLeftAnim2 0.6s ease-in-out 0.6s both;
-    animation: fromLeftAnim2 0.6s ease-in-out 0.6s both;
+    -webkit-animation: fromLeftAnim2 0.6s ease-in 0.6s both;
+    -moz-animation: fromLeftAnim2 0.6s ease-in 0.6s both;
+    -o-animation: fromLeftAnim2 0.6s ease-in 0.6s both;
+    -ms-animation: fromLeftAnim2 0.6s ease-in 0.6s both;
+    animation: fromLeftAnim2 0.6s ease-in 0.6s both;
 }
 
 .da-slide-fromleft .da-link {
-    -webkit-animation: fromLeftAnim3 0.4s ease-in-out 1.2s both;
-    -moz-animation: fromLeftAnim3 0.4s ease-in-out 1.2s both;
-    -o-animation: fromLeftAnim3 0.4s ease-in-out 1.2s both;
-    -ms-animation: fromLeftAnim3 0.4s ease-in-out 1.2s both;
-    animation: fromLeftAnim3 0.4s ease-in-out 1.2s both;
+    -webkit-animation: fromLeftAnim3 0.4s ease-in 1.2s both;
+    -moz-animation: fromLeftAnim3 0.4s ease-in 1.2s both;
+    -o-animation: fromLeftAnim3 0.4s ease-in 1.2s both;
+    -ms-animation: fromLeftAnim3 0.4s ease-in 1.2s both;
+    animation: fromLeftAnim3 0.4s ease-in 1.2s both;
 }
 
 .da-slide-fromleft .da-img {
-    -webkit-animation: fromLeftAnim4 0.6s ease-in-out 0.6s both;
-    -moz-animation: fromLeftAnim4 0.6s ease-in-out 0.6s both;
-    -o-animation: fromLeftAnim4 0.6s ease-in-out 0.6s both;
-    -ms-animation: fromLeftAnim4 0.6s ease-in-out 0.6s both;
-    animation: fromLeftAnim4 0.6s ease-in-out 0.6s both;
+    -webkit-animation: fromLeftAnim4 0.6s ease-in 0.6s both;
+    -moz-animation: fromLeftAnim4 0.6s ease-in 0.6s both;
+    -o-animation: fromLeftAnim4 0.6s ease-in 0.6s both;
+    -ms-animation: fromLeftAnim4 0.6s ease-in 0.6s both;
+    animation: fromLeftAnim4 0.6s ease-in 0.6s both;
 }
 
 @-webkit-keyframes fromLeftAnim1 {
@@ -684,38 +770,37 @@
         opacity: 1;
     }
 }
-
 /* Slide out to the right */
 .da-slide-toright h2 {
-    -webkit-animation: toRightAnim1 0.6s ease-in-out 0.6s both;
-    -moz-animation: toRightAnim1 0.6s ease-in-out 0.6s both;
-    -o-animation: toRightAnim1 0.6s ease-in-out 0.6s both;
-    -ms-animation: toRightAnim1 0.6s ease-in-out 0.6s both;
-    animation: toRightAnim1 0.6s ease-in-out 0.6s both;
+    -webkit-animation: toRightAnim1 0.6s ease-in 0.6s both;
+    -moz-animation: toRightAnim1 0.6s ease-in 0.6s both;
+    -o-animation: toRightAnim1 0.6s ease-in 0.6s both;
+    -ms-animation: toRightAnim1 0.6s ease-in 0.6s both;
+    animation: toRightAnim1 0.6s ease-in 0.6s both;
 }
 
 .da-slide-toright p {
-    -webkit-animation: toRightAnim2 0.6s ease-in-out 0.3s both;
-    -moz-animation: toRightAnim2 0.6s ease-in-out 0.3s both;
-    -o-animation: toRightAnim2 0.6s ease-in-out 0.3s both;
-    -ms-animation: toRightAnim2 0.6s ease-in-out 0.3s both;
-    animation: toRightAnim2 0.6s ease-in-out 0.3s both;
+    -webkit-animation: toRightAnim2 0.6s ease-in 0.3s both;
+    -moz-animation: toRightAnim2 0.6s ease-in 0.3s both;
+    -o-animation: toRightAnim2 0.6s ease-in 0.3s both;
+    -ms-animation: toRightAnim2 0.6s ease-in 0.3s both;
+    animation: toRightAnim2 0.6s ease-in 0.3s both;
 }
 
 .da-slide-toright .da-link {
-    -webkit-animation: toRightAnim3 0.4s ease-in-out both;
-    -moz-animation: toRightAnim3 0.4s ease-in-out both;
-    -o-animation: toRightAnim3 0.4s ease-in-out both;
-    -ms-animation: toRightAnim3 0.4s ease-in-out both;
-    animation: toRightAnim3 0.4s ease-in-out both;
+    -webkit-animation: toRightAnim3 0.4s ease-in both;
+    -moz-animation: toRightAnim3 0.4s ease-in both;
+    -o-animation: toRightAnim3 0.4s ease-in both;
+    -ms-animation: toRightAnim3 0.4s ease-in both;
+    animation: toRightAnim3 0.4s ease-in both;
 }
 
 .da-slide-toright .da-img {
-    -webkit-animation: toRightAnim4 0.6s ease-in-out both;
-    -moz-animation: toRightAnim4 0.6s ease-in-out both;
-    -o-animation: toRightAnim4 0.6s ease-in-out both;
-    -ms-animation: toRightAnim4 0.6s ease-in-out both;
-    animation: toRightAnim4 0.6s ease-in-out both;
+    -webkit-animation: toRightAnim4 0.6s ease-in both;
+    -moz-animation: toRightAnim4 0.6s ease-in both;
+    -o-animation: toRightAnim4 0.6s ease-in both;
+    -ms-animation: toRightAnim4 0.6s ease-in both;
+    animation: toRightAnim4 0.6s ease-in both;
 }
 
 @-webkit-keyframes toRightAnim1 {
@@ -977,38 +1062,37 @@
         opacity: 0;
     }
 }
-
 /* Slide out to the left*/
 .da-slide-toleft h2 {
-    -webkit-animation: toLeftAnim1 0.6s ease-in-out both;
-    -moz-animation: toLeftAnim1 0.6s ease-in-out both;
-    -o-animation: toLeftAnim1 0.6s ease-in-out both;
-    -ms-animation: toLeftAnim1 0.6s ease-in-out both;
-    animation: toLeftAnim1 0.6s ease-in-out both;
+    -webkit-animation: toLeftAnim1 0.6s ease-in both;
+    -moz-animation: toLeftAnim1 0.6s ease-in both;
+    -o-animation: toLeftAnim1 0.6s ease-in both;
+    -ms-animation: toLeftAnim1 0.6s ease-in both;
+    animation: toLeftAnim1 0.6s ease-in both;
 }
 
 .da-slide-toleft p {
-    -webkit-animation: toLeftAnim2 0.6s ease-in-out 0.3s both;
-    -moz-animation: toLeftAnim2 0.6s ease-in-out 0.3s both;
-    -o-animation: toLeftAnim2 0.6s ease-in-out 0.3s both;
-    -ms-animation: toLeftAnim2 0.6s ease-in-out 0.3s both;
-    animation: toLeftAnim2 0.6s ease-in-out 0.3s both;
+    -webkit-animation: toLeftAnim2 0.6s ease-in 0.3s both;
+    -moz-animation: toLeftAnim2 0.6s ease-in 0.3s both;
+    -o-animation: toLeftAnim2 0.6s ease-in 0.3s both;
+    -ms-animation: toLeftAnim2 0.6s ease-in 0.3s both;
+    animation: toLeftAnim2 0.6s ease-in 0.3s both;
 }
 
 .da-slide-toleft .da-link {
-    -webkit-animation: toLeftAnim3 0.6s ease-in-out 0.6s both;
-    -moz-animation: toLeftAnim3 0.6s ease-in-out 0.6s both;
-    -o-animation: toLeftAnim3 0.6s ease-in-out 0.6s both;
-    -ms-animation: toLeftAnim3 0.6s ease-in-out 0.6s both;
-    animation: toLeftAnim3 0.6s ease-in-out 0.6s both;
+    -webkit-animation: toLeftAnim3 0.4s ease-in both;
+    -moz-animation: toLeftAnim3 0.4s ease-in both;
+    -o-animation: toLeftAnim3 0.4s ease-in both;
+    -ms-animation: toLeftAnim3 0.4s ease-in both;
+    animation: toLeftAnim3 0.4s ease-in both;
 }
 
 .da-slide-toleft .da-img {
-    -webkit-animation: toLeftAnim4 0.6s ease-in-out 0.5s both;
-    -moz-animation: toLeftAnim4 0.6s ease-in-out 0.5s both;
-    -o-animation: toLeftAnim4 0.6s ease-in-out 0.5s both;
-    -ms-animation: toLeftAnim4 0.6s ease-in-out 0.5s both;
-    animation: toLeftAnim4 0.6s ease-in-out 0.5s both;
+    -webkit-animation: toLeftAnim4 0.6s ease-in 0.6s both;
+    -moz-animation: toLeftAnim4 0.6s ease-in 0.6s both;
+    -o-animation: toLeftAnim4 0.6s ease-in 0.6s both;
+    -ms-animation: toLeftAnim4 0.6s ease-in 0.6s both;
+    animation: toLeftAnim4 0.6s ease-in 0.6s both;
 }
 
 @-webkit-keyframes toLeftAnim1 {
@@ -1046,6 +1130,10 @@
         left: 10%;
         opacity: 1;
     }
+    99% {
+        left: 10%;
+        opacity: 0;
+    }
     100% {
         left: -50%;
         opacity: 0;
@@ -1057,8 +1145,12 @@
         left: 60%;
         opacity: 1;
     }
-    70% {
-        left: 30%;
+    40% {
+        left: 70%;
+        opacity: 1;
+    }
+    90% {
+        left: 0%;
         opacity: 0;
     }
     100% {
@@ -1102,6 +1194,10 @@
         left: 10%;
         opacity: 1;
     }
+    99% {
+        left: 10%;
+        opacity: 0;
+    }
     100% {
         left: -50%;
         opacity: 0;
@@ -1113,8 +1209,12 @@
         left: 60%;
         opacity: 1;
     }
-    70% {
-        left: 30%;
+    40% {
+        left: 70%;
+        opacity: 1;
+    }
+    90% {
+        left: 0%;
         opacity: 0;
     }
     100% {
@@ -1158,6 +1258,10 @@
         left: 10%;
         opacity: 1;
     }
+    99% {
+        left: 10%;
+        opacity: 0;
+    }
     100% {
         left: -50%;
         opacity: 0;
@@ -1169,8 +1273,12 @@
         left: 60%;
         opacity: 1;
     }
-    70% {
-        left: 30%;
+    40% {
+        left: 70%;
+        opacity: 1;
+    }
+    90% {
+        left: 0%;
         opacity: 0;
     }
     100% {
@@ -1214,6 +1322,10 @@
         left: 10%;
         opacity: 1;
     }
+    99% {
+        left: 10%;
+        opacity: 0;
+    }
     100% {
         left: -50%;
         opacity: 0;
@@ -1225,8 +1337,12 @@
         left: 60%;
         opacity: 1;
     }
-    70% {
-        left: 30%;
+    40% {
+        left: 70%;
+        opacity: 1;
+    }
+    90% {
+        left: 0%;
         opacity: 0;
     }
     100% {
@@ -1270,6 +1386,10 @@
         left: 10%;
         opacity: 1;
     }
+    99% {
+        left: 10%;
+        opacity: 0;
+    }
     100% {
         left: -50%;
         opacity: 0;
@@ -1281,209 +1401,16 @@
         left: 60%;
         opacity: 1;
     }
-    70% {
-        left: 30%;
+    40% {
+        left: 70%;
+        opacity: 1;
+    }
+    90% {
+        left: 0%;
         opacity: 0;
     }
     100% {
         left: -50%;
         opacity: 0;
-    }
-}
-
-/***** Media Quries *****/
-@media only screen  and (max-width: 1440px) {
-    .wrap {
-        width: 80%;
-    }
-}
-
-@media only screen  and (max-width: 1366px) {
-    .wrap {
-        width: 85%;
-    }
-
-    .da-slider {
-        height: 500px;
-    }
-
-    .da-slide p {
-        margin: 0em 9em;
-    }
-
-    .da-slide .da-link {
-        margin: 0em 18em;
-    }
-}
-
-@media only screen  and (max-width: 1280px) {
-    .wrap {
-        width: 85%;
-    }
-
-    .da-slider {
-        height: 480px;
-    }
-
-    .da-slide h2 {
-        top: 105px;
-        font-size: 2.3em;
-    }
-
-    .da-slide p {
-        top: 168px;
-        font-size: 1.2em;
-        margin: 0em 8em;
-    }
-
-    .da-slide .da-link {
-        top: 266px;
-        padding: 16px 3.3em;
-        margin: 0em 16em;
-    }
-
-}
-
-@media only screen  and (max-width: 1024px) {
-    .wrap {
-        width: 87%;
-    }
-
-    .da-slider {
-        height: 450px;
-    }
-
-    .da-slide h2 {
-        top: 89px;
-        font-size: 2.3em;
-    }
-
-    .da-slide p {
-        top: 155px;
-        width: 66%;
-        margin: 0em 3em;
-    }
-
-    .da-slide .da-link {
-        top: 288px;
-        padding: 15px 3.3em;
-        margin: 0em 12em;
-    }
-
-}
-
-@media only screen  and  (max-width: 768px) {
-    .wrap {
-        width: 90%;
-    }
-
-    .da-slider {
-        height: 295px;
-    }
-
-    .da-slide h2 {
-        top: 55px;
-        font-size: 2em;
-    }
-
-    .da-slide p {
-        top: 103px;
-        font-size: 1.1em;
-        width: 80%;
-        margin: 0em 1em;
-    }
-
-    .da-slide .da-link {
-        top: 188px;
-        padding: 0.58em 1.2em;
-        margin: 0em 10em;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    .wrap {
-        width: 90%;
-    }
-
-    .da-slider {
-        height: 250px;
-    }
-
-    .da-slide h2 {
-        top: 26px;
-        font-size: 1.65em;
-    }
-
-    .da-slide p {
-        top: 70px;
-        width: 73%;
-        height: 60px;
-        font-size: 0.9em;
-        text-align: center;
-        margin: 0 13px;
-    }
-
-    .da-slide .da-link {
-        top: 146px;
-        padding: 0.55em 1.3em;
-        margin: 0em 9em;
-        font-size: 1em;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .wrap {
-        width: 90%;
-    }
-
-    .da-slider {
-        height: 200px;
-    }
-
-    .da-slide h2 {
-        top: 10px;
-        font-size: 1.45em;
-    }
-
-    .da-slide p {
-        top: 48px;
-        width: 77%;
-        height: 53px;
-        font-size: 0.85em;
-        text-align: center;
-        margin: 0 8px;
-    }
-
-    .da-slide .da-link {
-        top: 115px;
-        padding: 0.65em 1.3em;
-        margin: 0em 7em;
-        font-size: 0.9em;
-    }
-}
-
-@media only screen and (max-width: 320px) {
-    .wrap {
-        width: 90%;
-    }
-
-    .da-slider {
-        height: 150px;
-    }
-
-    .da-slide h2 {
-        top: 5px;
-        font-size: 1.3em;
-    }
-
-    .da-slide p {
-        top: 35px;
-    }
-
-    .da-slide .da-link {
-        top: 98px;
-        padding: 0.6em 1.3em;
-        margin: 0em 3em;
-        font-size: 0.9em;
     }
 }
